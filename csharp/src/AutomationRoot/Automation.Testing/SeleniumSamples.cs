@@ -30,5 +30,17 @@ namespace Automation.Testing
             Thread.Sleep(1000);
             driver.Dispose();
         }
+
+        [TestMethod]
+        public void WebElementSamples()
+        {
+            var driver = new ChromeDriver();
+            driver.Manage().Window.Maximize();
+
+            driver.Navigate().GoToUrl("https://gravitymvctestapplication.azurewebsites.net/");
+            driver.FindElement(By.XPath("//a[.='Students']")).Click();
+            Thread.Sleep(2000);
+            driver.Dispose();
+        }
     }
 }
