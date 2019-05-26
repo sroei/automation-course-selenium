@@ -1,11 +1,13 @@
 /*
  * DOWNLOAD LINKS
- * ie:     https://www.seleniumhq.org/download/
- * gecko:  https://github.com/mozilla/geckodriver/releases
- * chrome: http://chromedriver.chromium.org/downloads
+ * ie:        https://www.seleniumhq.org/download/
+ * gecko:     https://github.com/mozilla/geckodriver/releases
+ * chrome:    http://chromedriver.chromium.org/downloads
+ * test-site: https://gravitymvctestapplication.azurewebsites.net/
  */
 package com.automation.testing.samples;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
@@ -52,6 +54,24 @@ public class SeleniumSamples {
 
         driver = new InternetExplorerDriver(ieDriverService);
         Thread.sleep(1000);
+        driver.quit();
+    }
+
+    @Test
+    public void WebElementSamples() throws InterruptedException {
+        // CHROME
+        ChromeDriverService chromeDriverService = new ChromeDriverService
+                .Builder()
+                .usingDriverExecutable(new File("D:\\garbage\\web-drivers\\chromedriver.exe"))
+                .usingAnyFreePort()
+                .build();
+
+        WebDriver driver = new ChromeDriver(chromeDriverService);
+        driver.manage().window().maximize();
+
+        driver.navigate().to("https://gravitymvctestapplication.azurewebsites.net/");
+        driver.findElement(By.xpath("//a[.='Students']")).click();
+        Thread.sleep(2000);
         driver.quit();
     }
 }
