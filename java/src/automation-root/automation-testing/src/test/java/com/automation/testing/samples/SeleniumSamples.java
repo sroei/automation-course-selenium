@@ -9,12 +9,14 @@ package com.automation.testing.samples;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.GeckoDriverService;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerDriverService;
+import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
 import java.io.File;
@@ -71,6 +73,26 @@ public class SeleniumSamples {
 
         driver.navigate().to("https://gravitymvctestapplication.azurewebsites.net/");
         driver.findElement(By.xpath("//a[.='Students']")).click();
+        Thread.sleep(2000);
+        driver.quit();
+    }
+
+    @Test
+    public void SelectElementSamples() throws InterruptedException {
+        // CHROME
+        ChromeDriverService chromeDriverService = new ChromeDriverService
+                .Builder()
+                .usingDriverExecutable(new File("D:\\garbage\\web-drivers\\chromedriver.exe"))
+                .usingAnyFreePort()
+                .build();
+
+        WebDriver driver = new ChromeDriver(chromeDriverService);
+        driver.manage().window().maximize();
+
+        driver.navigate().to("https://gravitymvctestapplication.azurewebsites.net/Course");
+        WebElement element = driver.findElement(By.xpath("//select[@id='SelectedDepartment']"));
+        Select selectElement = new Select(element);
+        selectElement.selectByValue("4");
         Thread.sleep(2000);
         driver.quit();
     }
