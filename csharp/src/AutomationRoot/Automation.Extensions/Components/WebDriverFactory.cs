@@ -28,11 +28,36 @@ namespace Automation.Extensions.Components
             }
         }
 
+        /// <summary>
+        /// generates web-driver based on input params
+        /// </summary>
+        /// <returns>web-driver instance</returns>
+        public IWebDriver Get()
+        {
+            if (!string.Equals(driverParams.Source, "REMOTE", StringComparison.OrdinalIgnoreCase))
+            {
+                return GetDriver();
+            }
+            return GetRemoteDriver();
+        }
+
         // local web-drivers
         private IWebDriver GetChrome() => new ChromeDriver(driverParams.Binaries);
         private IWebDriver GetFirefox() => new FirefoxDriver(driverParams.Binaries);
         private IWebDriver GetInternetExplorer() => new InternetExplorerDriver(driverParams.Binaries);
         private IWebDriver GetEdge() => new EdgeDriver(driverParams.Binaries);
+
+        private IWebDriver GetDriver()
+        {
+            switch (driverParams.Driver.ToUpper())
+            {
+                case "EDGE": return GetEdge();
+                case "IE": return GetInternetExplorer();
+                case "FIREFOX": return GetFirefox();
+                case "CHROME":
+                default: return GetChrome();
+            }
+        }
 
         // remote web-drivers
         private IWebDriver GetRemoteChrome()
@@ -46,6 +71,18 @@ namespace Automation.Extensions.Components
 
         private IWebDriver GetRemoteEdge()
             => new RemoteWebDriver(new Uri(driverParams.Binaries), new EdgeOptions());
+
+        private IWebDriver GetRemoteDriver()
+        {
+            switch (driverParams.Driver.ToUpper())
+            {
+                case "EDGE": return GetRemoteEdge();
+                case "IE": return GetRemoteInternetExplorer();
+                case "FIREFOX": return GetRemoteFirefox();
+                case "CHROME":
+                default: return GetRemoteChrome();
+            }
+        }
 
         // load json into driver-params object
         private static DriverParams LoadParams(string driverParamsJson)
