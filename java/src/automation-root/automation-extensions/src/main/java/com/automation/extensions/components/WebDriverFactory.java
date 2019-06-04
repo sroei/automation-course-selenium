@@ -35,7 +35,7 @@ public class WebDriverFactory {
     /**
      * generate web-driver based on input params
      * @return web-driver instance
-     * @throws MalformedURLException
+     * @throws MalformedURLException from inner factory
      */
     public WebDriver get() throws MalformedURLException {
         if(!driverParams.getSource().toUpperCase().equals("REMOTE")){
