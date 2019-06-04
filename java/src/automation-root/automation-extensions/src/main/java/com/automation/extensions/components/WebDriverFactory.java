@@ -32,8 +32,20 @@ public class WebDriverFactory {
         this.driverParams = driverParams;
     }
 
+    /**
+     * generate web-driver based on input params
+     * @return web-driver instance
+     * @throws MalformedURLException
+     */
+    public WebDriver get() throws MalformedURLException {
+        if(!driverParams.getSource().toUpperCase().equals("REMOTE")){
+            return getDriver();
+        }
+        return getRemoteDriver();
+    }
+
     // local web-drivers
-    private WebDriver GetChrome() {
+    private WebDriver getChrome() {
         // CHROME
         ChromeDriverService chromeDriverService = new ChromeDriverService
                 .Builder()
@@ -44,7 +56,7 @@ public class WebDriverFactory {
         return new ChromeDriver(chromeDriverService);
     }
 
-    private WebDriver GetFirefox() {
+    private WebDriver getFirefox() {
         // FIREFOX
         GeckoDriverService geckoDriverService = new GeckoDriverService
                 .Builder()
@@ -55,7 +67,7 @@ public class WebDriverFactory {
         return new FirefoxDriver(geckoDriverService);
     }
 
-    private WebDriver GetInternetExplorer() {
+    private WebDriver getInternetExplorer() {
         // INTERNET EXPLORER
         InternetExplorerDriverService ieDriverService = new InternetExplorerDriverService
                 .Builder()
@@ -66,7 +78,7 @@ public class WebDriverFactory {
         return new InternetExplorerDriver(ieDriverService);
     }
 
-    private WebDriver GetEdge() {
+    private WebDriver getEdge() {
         // EDGE
         EdgeDriverService edgeDriverService = new EdgeDriverService
                 .Builder()
@@ -77,21 +89,41 @@ public class WebDriverFactory {
         return new EdgeDriver(edgeDriverService);
     }
 
+    private WebDriver getDriver(){
+        switch (driverParams.getDriver().toUpperCase()){
+            case "EDGE": return getEdge();
+            case "IE": return getInternetExplorer();
+            case "FIREFOX": return getFirefox();
+            case "CHROME":
+            default: return getChrome();
+        }
+    }
+
     // remote web-drivers
-    private WebDriver GetRemoteChrome() throws MalformedURLException {
+    private WebDriver getRemoteChrome() throws MalformedURLException {
         return new RemoteWebDriver(new URL(driverParams.getBinaries()), new ChromeOptions());
     }
 
-    private WebDriver GetRemoteFirefox() throws MalformedURLException {
+    private WebDriver getRemoteFirefox() throws MalformedURLException {
         return new RemoteWebDriver(new URL(driverParams.getBinaries()), new FirefoxOptions());
     }
 
-    private WebDriver GetRemoteInternetExplorer() throws MalformedURLException {
+    private WebDriver getRemoteInternetExplorer() throws MalformedURLException {
         return new RemoteWebDriver(new URL(driverParams.getBinaries()), new InternetExplorerOptions());
     }
 
-    private WebDriver GetRemoteEdge() throws MalformedURLException {
+    private WebDriver getRemoteEdge() throws MalformedURLException {
         return new RemoteWebDriver(new URL(driverParams.getBinaries()), new EdgeOptions());
+    }
+
+    private WebDriver getRemoteDriver() throws MalformedURLException {
+        switch (driverParams.getDriver().toUpperCase()){
+            case "EDGE": return getRemoteEdge();
+            case "IE": return getRemoteInternetExplorer();
+            case "FIREFOX": return getRemoteFirefox();
+            case "CHROME":
+            default: return getRemoteChrome();
+        }
     }
 
     // load json into driver-params object
