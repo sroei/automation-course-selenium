@@ -16,4 +16,8 @@
     <PackageReference Include="Selenium.WebDriver.IEDriver" Version="3.141.59" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Automation.Extensions\Automation.Extensions.csproj" />
+  </ItemGroup>
+
 </Project>
