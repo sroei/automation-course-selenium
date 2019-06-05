@@ -7,6 +7,8 @@
  */
 package com.automation.testing.samples;
 
+import com.automation.extensions.components.WebDriverFactory;
+import com.automation.extensions.contracts.DriverParams;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -20,6 +22,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.annotations.Test;
 
 import java.io.File;
+import java.net.MalformedURLException;
 
 public class SeleniumSamples {
 
@@ -93,6 +96,17 @@ public class SeleniumSamples {
         WebElement element = driver.findElement(By.xpath("//select[@id='SelectedDepartment']"));
         Select selectElement = new Select(element);
         selectElement.selectByValue("4");
+        Thread.sleep(2000);
+        driver.quit();
+    }
+
+    @Test
+    public void WebDriverFactorySamples() throws InterruptedException, MalformedURLException {
+        WebDriver driver = new WebDriverFactory(new DriverParams().setDriver("firefox").setBinaries("D:\\automation-env\\web-drivers")).get();
+        driver.manage().window().maximize();
+
+        driver.navigate().to("https://gravitymvctestapplication.azurewebsites.net/");
+        driver.findElement(By.xpath("//a[.='Students']")).click();
         Thread.sleep(2000);
         driver.quit();
     }
