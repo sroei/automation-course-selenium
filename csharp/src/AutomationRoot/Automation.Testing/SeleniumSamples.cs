@@ -63,7 +63,7 @@ namespace Automation.Testing
         [TestMethod]
         public void WebDriverFactorySample()
         {
-            var driver = new WebDriverFactory(new DriverParams { Driver = "firefox", Binaries = @"D:\automation-env\web-drivers" }).Get();
+            var driver = new WebDriverFactory(new DriverParams { Driver = "edge", Binaries = @"D:\automation-env\web-drivers" }).Get();
             driver.Manage().Window.Maximize();
 
             driver.Navigate().GoToUrl("https://gravitymvctestapplication.azurewebsites.net/");
