@@ -102,7 +102,7 @@ public class SeleniumSamples {
 
     @Test
     public void WebDriverFactorySamples() throws InterruptedException, MalformedURLException {
-        WebDriver driver = new WebDriverFactory(new DriverParams().setDriver("firefox").setBinaries("D:\\automation-env\\web-drivers")).get();
+        WebDriver driver = new WebDriverFactory(new DriverParams().setDriver("edge").setBinaries("D:\\automation-env\\web-drivers")).get();
         driver.manage().window().maximize();
 
         driver.navigate().to("https://gravitymvctestapplication.azurewebsites.net/");
