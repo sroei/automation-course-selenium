@@ -71,5 +71,15 @@ namespace Automation.Testing
             Thread.Sleep(2000);
             driver.Dispose();
         }
+
+        [TestMethod]
+        public void GoToUrlSample()
+        {
+            var driver = new WebDriverFactory(new DriverParams { Driver = "chrome", Binaries = @"D:\automation-env\web-drivers" }).Get();
+
+            driver.GoToUrl("https://gravitymvctestapplication.azurewebsites.net/");
+            Thread.Sleep(2000);
+            driver.Dispose();
+        }
     }
 }
