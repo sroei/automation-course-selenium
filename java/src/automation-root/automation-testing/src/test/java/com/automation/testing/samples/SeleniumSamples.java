@@ -7,6 +7,7 @@
  */
 package com.automation.testing.samples;
 
+import com.automation.extensions.components.WebDriverExtensions;
 import com.automation.extensions.components.WebDriverFactory;
 import com.automation.extensions.contracts.DriverParams;
 import org.openqa.selenium.By;
@@ -27,7 +28,7 @@ import java.net.MalformedURLException;
 public class SeleniumSamples {
 
     @Test
-    public void WebDriverSamples() throws InterruptedException {
+    public void webDriverSamples() throws InterruptedException {
         // CHROME
         ChromeDriverService chromeDriverService = new ChromeDriverService
                 .Builder()
@@ -63,7 +64,7 @@ public class SeleniumSamples {
     }
 
     @Test
-    public void WebElementSamples() throws InterruptedException {
+    public void webElementSamples() throws InterruptedException {
         // CHROME
         ChromeDriverService chromeDriverService = new ChromeDriverService
                 .Builder()
@@ -81,7 +82,7 @@ public class SeleniumSamples {
     }
 
     @Test
-    public void SelectElementSamples() throws InterruptedException {
+    public void selectElementSamples() throws InterruptedException {
         // CHROME
         ChromeDriverService chromeDriverService = new ChromeDriverService
                 .Builder()
@@ -101,12 +102,24 @@ public class SeleniumSamples {
     }
 
     @Test
-    public void WebDriverFactorySamples() throws InterruptedException, MalformedURLException {
+    public void webDriverFactorySamples() throws InterruptedException, MalformedURLException {
         WebDriver driver = new WebDriverFactory(new DriverParams().setDriver("edge").setBinaries("D:\\automation-env\\web-drivers")).get();
         driver.manage().window().maximize();
 
         driver.navigate().to("https://gravitymvctestapplication.azurewebsites.net/");
         driver.findElement(By.xpath("//a[.='Students']")).click();
+        Thread.sleep(2000);
+        driver.quit();
+    }
+
+    @Test
+    public void goToUrlSample() throws InterruptedException, MalformedURLException {
+        WebDriver driver = new WebDriverFactory(new DriverParams().setDriver("chrome").setBinaries("D:\\automation-env\\web-drivers")).get();
+
+        // extension object
+        WebDriverExtensions driverExtensions = new WebDriverExtensions(driver);
+
+        driverExtensions.goToUrl("https://gravitymvctestapplication.azurewebsites.net/");
         Thread.sleep(2000);
         driver.quit();
     }
