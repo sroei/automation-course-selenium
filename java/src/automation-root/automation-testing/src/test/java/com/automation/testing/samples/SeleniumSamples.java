@@ -24,6 +24,7 @@ import org.testng.annotations.Test;
 
 import java.io.File;
 import java.net.MalformedURLException;
+import java.util.List;
 
 public class SeleniumSamples {
 
@@ -147,6 +148,19 @@ public class SeleniumSamples {
         driverExtensions.goToUrl("https://gravitymvctestapplication.azurewebsites.net/Course");
         WebElement element = driverExtensions.getElement(By.xpath("//select[@id='SelectedDepartment']"));
         driverExtensions.asSelect(element).selectByValue("4");
+        Thread.sleep(2000);
+        driver.quit();
+    }
+
+    @Test
+    public void getElementsSample() throws InterruptedException, MalformedURLException {
+        WebDriver driver = new WebDriverFactory(new DriverParams().setDriver("chrome").setBinaries("D:\\automation-env\\web-drivers")).get();
+
+        // extension object
+        WebDriverExtensions driverExtensions = new WebDriverExtensions(driver);
+
+        driverExtensions.goToUrl("https://gravitymvctestapplication.azurewebsites.net/");
+        List<WebElement> element = driverExtensions.getElements(By.xpath("//ul/li"));
         Thread.sleep(2000);
         driver.quit();
     }
