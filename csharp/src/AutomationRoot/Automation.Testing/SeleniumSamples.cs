@@ -88,8 +88,20 @@ namespace Automation.Testing
             var driver = new WebDriverFactory(new DriverParams { Driver = "chrome", Binaries = @"D:\automation-env\web-drivers" }).Get();
             driver.Manage().Window.Maximize();
 
-            driver.Navigate().GoToUrl("https://gravitymvctestapplication.azurewebsites.ne/");
+            driver.Navigate().GoToUrl("https://gravitymvctestapplication.azurewebsites.net/");
             driver.GetElement(By.XPath("//a[.='Students']")).Click();
+            Thread.Sleep(2000);
+            driver.Dispose();
+        }
+
+        [TestMethod]
+        public void AsSelectSample()
+        {
+            var driver = new WebDriverFactory(new DriverParams { Driver = "chrome", Binaries = @"D:\automation-env\web-drivers" }).Get();
+            driver.Manage().Window.Maximize();
+
+            driver.Navigate().GoToUrl("https://gravitymvctestapplication.azurewebsites.net/Course");
+            driver.FindElement(By.XPath("//select[@id='SelectedDepartment']")).AsSelect().SelectByValue("4");
             Thread.Sleep(2000);
             driver.Dispose();
         }

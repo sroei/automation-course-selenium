@@ -25,5 +25,7 @@ namespace Automation.Extensions.Components
             var wait = new WebDriverWait(driver, timeout);
             return wait.Until(d => d.FindElement(by));
         }
+
+        public static SelectElement AsSelect(this IWebElement element) => new SelectElement(element);
     }
 }
