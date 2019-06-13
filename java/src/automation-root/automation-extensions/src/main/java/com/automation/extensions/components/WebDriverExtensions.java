@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
+import java.util.List;
 
 
 public class WebDriverExtensions {
@@ -35,5 +36,13 @@ public class WebDriverExtensions {
 
     public Select asSelect(WebElement element) {
         return new Select(element);
+    }
+
+    public List<WebElement> getElements(By by) {
+        return getElements(by, Duration.ofSeconds(15));
+    }
+
+    public List<WebElement> getElements(By by, Duration timeout) {
+        return wait.withTimeout(timeout).until(d -> d.findElements(by));
     }
 }
