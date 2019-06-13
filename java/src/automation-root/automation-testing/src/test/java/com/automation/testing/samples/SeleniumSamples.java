@@ -131,8 +131,22 @@ public class SeleniumSamples {
         // extension object
         WebDriverExtensions driverExtensions = new WebDriverExtensions(driver);
 
-        driverExtensions.goToUrl("https://gravitymvctestapplication.azurewebsites.ne/");
+        driverExtensions.goToUrl("https://gravitymvctestapplication.azurewebsites.net/");
         driverExtensions.getElement(By.xpath("//a[.='Students']")).click();
+        Thread.sleep(2000);
+        driver.quit();
+    }
+
+    @Test
+    public void asSelectSample() throws InterruptedException, MalformedURLException {
+        WebDriver driver = new WebDriverFactory(new DriverParams().setDriver("chrome").setBinaries("D:\\automation-env\\web-drivers")).get();
+
+        // extension object
+        WebDriverExtensions driverExtensions = new WebDriverExtensions(driver);
+
+        driverExtensions.goToUrl("https://gravitymvctestapplication.azurewebsites.net/Course");
+        WebElement element = driverExtensions.getElement(By.xpath("//select[@id='SelectedDepartment']"));
+        driverExtensions.asSelect(element).selectByValue("4");
         Thread.sleep(2000);
         driver.quit();
     }

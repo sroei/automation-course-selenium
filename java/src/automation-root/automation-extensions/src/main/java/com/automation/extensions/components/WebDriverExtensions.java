@@ -5,6 +5,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
 
@@ -30,5 +31,9 @@ public class WebDriverExtensions {
 
     public WebElement getElement(By by, Duration timeout) {
         return wait.withTimeout(timeout).until(d -> d.findElement(by));
+    }
+
+    public Select asSelect(WebElement element) {
+        return new Select(element);
     }
 }
