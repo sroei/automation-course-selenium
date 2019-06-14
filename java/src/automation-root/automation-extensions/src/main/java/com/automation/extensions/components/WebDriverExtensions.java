@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.time.Duration;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class WebDriverExtensions {
@@ -58,5 +59,15 @@ public class WebDriverExtensions {
             }
             return element;
         });
+    }
+
+    public List<WebElement> getVisibleElements(By by) {
+        return getVisibleElements(by, Duration.ofSeconds(15));
+    }
+
+    public List<WebElement> getVisibleElements(By by, Duration timeout) {
+        return wait.withTimeout(timeout).until(d->
+                d.findElements(by).stream().filter(WebElement::isDisplayed).collect(Collectors.toList())
+        );
     }
 }
