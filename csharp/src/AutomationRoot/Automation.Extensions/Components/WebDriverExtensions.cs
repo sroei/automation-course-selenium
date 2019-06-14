@@ -36,5 +36,17 @@ namespace Automation.Extensions.Components
             var wait = new WebDriverWait(driver, timeout);
             return wait.Until(d => d.FindElements(by));
         }
+
+        public static IWebElement GetVisibleElement(this IWebDriver driver, By by) => GetVisibleElement(driver, by, TimeSpan.FromSeconds(15));
+
+        public static IWebElement GetVisibleElement(this IWebDriver driver, By by, TimeSpan timeout)
+        {
+            var wait = new WebDriverWait(driver, timeout);
+            return wait.Until(d =>
+            {
+                var element = d.FindElement(by);
+                return element.Displayed ? element : null;
+            });
+        }
     }
 }
