@@ -178,5 +178,16 @@ public class SeleniumSamples {
         driver.quit();
     }
 
+    @Test
+    public void getVisibleElementsSample() throws InterruptedException, MalformedURLException {
+        WebDriver driver = new WebDriverFactory(new DriverParams().setDriver("chrome").setBinaries("D:\\automation-env\\web-drivers")).get();
 
+        // extension object
+        WebDriverExtensions driverExtensions = new WebDriverExtensions(driver);
+
+        driverExtensions.goToUrl("https://gravitymvctestapplication.azurewebsites.net/");
+        List<WebElement> element = driverExtensions.getVisibleElements(By.xpath("//ul/li"));
+        Thread.sleep(2000);
+        driver.quit();
+    }
 }
