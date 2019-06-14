@@ -127,5 +127,16 @@ namespace Automation.Testing
             Thread.Sleep(2000);
             driver.Dispose();
         }
+
+        [TestMethod]
+        public void GetVisibleElementsSample()
+        {
+            var driver = new WebDriverFactory(new DriverParams { Driver = "chrome", Binaries = @"D:\automation-env\web-drivers" }).Get();
+
+            driver.GoToUrl("https://gravitymvctestapplication.azurewebsites.net/");
+            var elements = driver.GetVisibleElements(By.XPath("//ul/li"));
+            Thread.Sleep(2000);
+            driver.Dispose();
+        }
     }
 }
