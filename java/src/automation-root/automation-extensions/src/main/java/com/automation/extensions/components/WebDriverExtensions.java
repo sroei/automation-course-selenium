@@ -45,4 +45,18 @@ public class WebDriverExtensions {
     public List<WebElement> getElements(By by, Duration timeout) {
         return wait.withTimeout(timeout).until(d -> d.findElements(by));
     }
+
+    public WebElement getVisibleElement(By by) {
+        return getVisibleElement(by, Duration.ofSeconds(15));
+    }
+
+    public WebElement getVisibleElement(By by, Duration timeout) {
+        return wait.withTimeout(timeout).until(d -> {
+            WebElement element = d.findElement(by);
+            if (!element.isDisplayed()) {
+                throw new NoSuchElementException("element exists, but not displayed");
+            }
+            return element;
+        });
+    }
 }
