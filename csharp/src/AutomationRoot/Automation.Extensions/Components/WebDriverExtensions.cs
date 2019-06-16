@@ -62,5 +62,17 @@ namespace Automation.Extensions.Components
                 return new ReadOnlyCollection<IWebElement>(elements);
             });
         }
+
+        public static IWebElement GetEnabledElement(this IWebDriver driver, By by) => GetEnabledElement(driver, by, TimeSpan.FromSeconds(15));
+
+        public static IWebElement GetEnabledElement(this IWebDriver driver, By by, TimeSpan timeout)
+        {
+            var wait = new WebDriverWait(driver, timeout);
+            return wait.Until(d =>
+            {
+                var element = d.FindElement(by);
+                return element.Enabled ? element : null;
+            });
+        }
     }
 }
