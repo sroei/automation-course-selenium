@@ -70,4 +70,18 @@ public class WebDriverExtensions {
                 d.findElements(by).stream().filter(WebElement::isDisplayed).collect(Collectors.toList())
         );
     }
+
+    public WebElement getEnabledElement(By by) {
+        return getEnabledElement(by, Duration.ofSeconds(15));
+    }
+
+    public WebElement getEnabledElement(By by, Duration timeout) {
+        return wait.withTimeout(timeout).until(d -> {
+            WebElement element = d.findElement(by);
+            if (!element.isEnabled()) {
+                throw new NoSuchElementException("element exists, but not displayed");
+            }
+            return element;
+        });
+    }
 }
