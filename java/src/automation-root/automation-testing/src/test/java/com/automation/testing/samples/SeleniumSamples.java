@@ -11,6 +11,7 @@ import com.automation.extensions.components.WebDriverExtensions;
 import com.automation.extensions.components.WebDriverFactory;
 import com.automation.extensions.contracts.DriverParams;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -200,6 +201,20 @@ public class SeleniumSamples {
 
         driverExtensions.goToUrl("https://gravitymvctestapplication.azurewebsites.net/Student");
         driverExtensions.getEnabledElement(By.xpath("//input[@id='SearchString']")).sendKeys("hello");
+        Thread.sleep(2000);
+        driver.quit();
+    }
+
+    @Test
+    public void verticalWindowScrollSample() throws InterruptedException, MalformedURLException {
+        WebDriver driver = new WebDriverFactory(new DriverParams().setDriver("chrome").setBinaries("D:\\automation-env\\web-drivers")).get();
+
+        // extension object
+        WebDriverExtensions driverExtensions = new WebDriverExtensions(driver);
+
+        driverExtensions.goToUrl("https://gravitymvctestapplication.azurewebsites.net/Student");
+        driver.manage().window().setSize(new Dimension(100, 350));
+        driverExtensions.verticalWindowScroll(1000);
         Thread.sleep(2000);
         driver.quit();
     }

@@ -1,9 +1,6 @@
 package com.automation.extensions.components;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 
@@ -66,7 +63,7 @@ public class WebDriverExtensions {
     }
 
     public List<WebElement> getVisibleElements(By by, Duration timeout) {
-        return wait.withTimeout(timeout).until(d->
+        return wait.withTimeout(timeout).until(d ->
                 d.findElements(by).stream().filter(WebElement::isDisplayed).collect(Collectors.toList())
         );
     }
@@ -83,5 +80,11 @@ public class WebDriverExtensions {
             }
             return element;
         });
+    }
+
+    public WebDriver verticalWindowScroll(int scrollAmount) {
+        String scrip = String.format("window.scroll(0,%d)", scrollAmount);
+        ((JavascriptExecutor) driver).executeScript(scrip);
+        return driver;
     }
 }
