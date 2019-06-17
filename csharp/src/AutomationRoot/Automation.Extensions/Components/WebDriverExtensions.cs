@@ -74,5 +74,11 @@ namespace Automation.Extensions.Components
                 return element.Enabled ? element : null;
             });
         }
+
+        public static IWebDriver VerticalWindowScroll(this IWebDriver driver, int scrollAmount)
+        {
+            ((IJavaScriptExecutor)driver).ExecuteScript($"window.scroll(0,{scrollAmount});");
+            return driver;
+        }
     }
 }

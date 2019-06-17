@@ -8,6 +8,7 @@ using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -146,6 +147,18 @@ namespace Automation.Testing
 
             driver.GoToUrl("https://gravitymvctestapplication.azurewebsites.net/Student");
             driver.GetEnabledElement(By.XPath("//input[@id='SearchString']")).SendKeys("hello");
+            Thread.Sleep(2000);
+            driver.Dispose();
+        }
+
+        [TestMethod]
+        public void VerticalWindowScrollSample()
+        {
+            var driver = new WebDriverFactory(new DriverParams { Driver = "chrome", Binaries = @"D:\automation-env\web-drivers" }).Get();
+
+            driver.GoToUrl("https://gravitymvctestapplication.azurewebsites.net/Student");
+            driver.Manage().Window.Size = new Size(100, 350);
+            driver.VerticalWindowScroll(1000);
             Thread.Sleep(2000);
             driver.Dispose();
         }
