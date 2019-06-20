@@ -1,6 +1,8 @@
 package com.automation.extensions.components;
 
 import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 
@@ -12,10 +14,12 @@ import java.util.stream.Collectors;
 public class WebDriverExtensions {
     private WebDriver driver;
     private FluentWait<WebDriver> wait;
+    private Actions actions;
 
     public WebDriverExtensions(WebDriver driver) {
         this.driver = driver;
         wait = new FluentWait<>(driver).ignoring(NoSuchElementException.class);
+        actions = new Actions(driver);
     }
 
     public WebDriver goToUrl(String url) {
@@ -86,5 +90,9 @@ public class WebDriverExtensions {
         String scrip = String.format("window.scroll(0,%d)", scrollAmount);
         ((JavascriptExecutor) driver).executeScript(scrip);
         return driver;
+    }
+
+    public Actions getActions(WebElement element){
+        return actions.moveToElement(element);
     }
 }
