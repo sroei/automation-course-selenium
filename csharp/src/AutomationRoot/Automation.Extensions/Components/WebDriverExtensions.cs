@@ -1,10 +1,11 @@
 ﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Internal;
+using OpenQA.Selenium.Remote;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
 
 namespace Automation.Extensions.Components
 {
@@ -79,6 +80,13 @@ namespace Automation.Extensions.Components
         {
             ((IJavaScriptExecutor)driver).ExecuteScript($"window.scroll(0,{scrollAmount});");
             return driver;
+        }
+
+        public static Actions Actions(this IWebElement element)
+        {
+            var driver = ((IWrapsDriver)element).WrappedDriver;
+            var actions = new Actions(driver);
+            return actions.MoveToElement(element);
         }
     }
 }
