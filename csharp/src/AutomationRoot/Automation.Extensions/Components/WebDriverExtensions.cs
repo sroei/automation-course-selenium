@@ -88,5 +88,13 @@ namespace Automation.Extensions.Components
             var actions = new Actions(driver);
             return actions.MoveToElement(element);
         }
+
+        public static IWebElement ForceClick(this IWebElement element)
+        {
+            var driver = ((IWrapsDriver)element).WrappedDriver;
+            var executor = (IJavaScriptExecutor)driver;
+            executor.ExecuteScript("arguments[0].click();", element);
+            return element;
+        }
     }
 }
