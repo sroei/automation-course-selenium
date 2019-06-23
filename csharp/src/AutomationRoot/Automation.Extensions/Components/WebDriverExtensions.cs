@@ -6,6 +6,7 @@ using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading;
 
 namespace Automation.Extensions.Components
 {
@@ -94,6 +95,16 @@ namespace Automation.Extensions.Components
             var driver = ((IWrapsDriver)element).WrappedDriver;
             var executor = (IJavaScriptExecutor)driver;
             executor.ExecuteScript("arguments[0].click();", element);
+            return element;
+        }
+
+        public static IWebElement SendKeys(this IWebElement element, string text, int interval)
+        {
+            foreach (var @char in text)
+            {
+                element.SendKeys($"{@char}");
+                Thread.Sleep(interval);
+            }
             return element;
         }
     }
