@@ -95,4 +95,11 @@ public class WebDriverExtensions {
     public Actions getActions(WebElement element){
         return actions.moveToElement(element);
     }
+
+    public WebElement forceClick(WebElement element){
+        WebDriver driver = ((WrapsDriver)element).getWrappedDriver();
+        JavascriptExecutor executor = (JavascriptExecutor)driver;
+        executor.executeScript("arguments[0].click();", element);
+        return element;
+    }
 }
