@@ -92,14 +92,22 @@ public class WebDriverExtensions {
         return driver;
     }
 
-    public Actions getActions(WebElement element){
+    public Actions getActions(WebElement element) {
         return actions.moveToElement(element);
     }
 
-    public WebElement forceClick(WebElement element){
-        WebDriver driver = ((WrapsDriver)element).getWrappedDriver();
-        JavascriptExecutor executor = (JavascriptExecutor)driver;
+    public WebElement forceClick(WebElement element) {
+        WebDriver driver = ((WrapsDriver) element).getWrappedDriver();
+        JavascriptExecutor executor = (JavascriptExecutor) driver;
         executor.executeScript("arguments[0].click();", element);
+        return element;
+    }
+
+    public WebElement sendKeys(WebElement element, String text, int interval) throws InterruptedException {
+        for (char c : text.toCharArray()) {
+            element.sendKeys(String.valueOf(c));
+            Thread.sleep(interval);
+        }
         return element;
     }
 }
