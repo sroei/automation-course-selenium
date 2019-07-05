@@ -196,5 +196,19 @@ namespace Automation.Testing
             Thread.Sleep(2000);
             driver.Dispose();
         }
+
+        [TestMethod]
+        public void ForceClearlSample()
+        {
+            var driver = new WebDriverFactory(new DriverParams { Driver = "chrome" }).Get();
+
+            driver.GoToUrl("https://gravitymvctestapplication.azurewebsites.net/Student");
+            var element = driver.GetEnabledElement(By.XPath("//input[@id='SearchString']"));
+            element.SendKeys("hello", 0);
+            element.SendKeys(Keys.Home);
+            element.ForceClear();
+            Thread.Sleep(2000);
+            driver.Dispose();
+        }
     }
 }

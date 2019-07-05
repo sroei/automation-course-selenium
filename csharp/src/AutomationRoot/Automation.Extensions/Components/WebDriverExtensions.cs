@@ -107,5 +107,17 @@ namespace Automation.Extensions.Components
             }
             return element;
         }
+
+        public static IWebElement ForceClear(this IWebElement element)
+        {
+            var value = element.GetAttribute("value");
+            element.SendKeys(Keys.End);
+            for (int i = 0; i < value.Length; i++)
+            {
+                element.SendKeys(Keys.Backspace);
+                Thread.Sleep(50);
+            }
+            return element;
+        }
     }
 }
