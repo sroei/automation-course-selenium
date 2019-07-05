@@ -10,10 +10,7 @@ package com.automation.testing.samples;
 import com.automation.extensions.components.WebDriverExtensions;
 import com.automation.extensions.components.WebDriverFactory;
 import com.automation.extensions.contracts.DriverParams;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -257,6 +254,22 @@ public class SeleniumSamples {
         driverExtensions.goToUrl("https://gravitymvctestapplication.azurewebsites.net/Student");
         WebElement element = driverExtensions.getEnabledElement(By.xpath("//input[@id='SearchString']"));
         driverExtensions.sendKeys(element, "hello", 1000);
+        Thread.sleep(2000);
+        driver.quit();
+    }
+
+    @Test
+    public void forceClearSample() throws InterruptedException, MalformedURLException {
+        WebDriver driver = new WebDriverFactory(new DriverParams().setDriver("chrome").setBinaries("D:\\automation-env\\web-drivers")).get();
+
+        // extension object
+        WebDriverExtensions driverExtensions = new WebDriverExtensions(driver);
+
+        driverExtensions.goToUrl("https://gravitymvctestapplication.azurewebsites.net/Student");
+        WebElement element = driverExtensions.getEnabledElement(By.xpath("//input[@id='SearchString']"));
+        driverExtensions.sendKeys(element, "hello", 0).sendKeys(Keys.HOME);
+
+        driverExtensions.forceClear(element);
         Thread.sleep(2000);
         driver.quit();
     }
