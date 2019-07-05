@@ -6,6 +6,7 @@ import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 
+import java.security.Key;
 import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -107,6 +108,16 @@ public class WebDriverExtensions {
         for (char c : text.toCharArray()) {
             element.sendKeys(String.valueOf(c));
             Thread.sleep(interval);
+        }
+        return element;
+    }
+
+    public WebElement forceClear(WebElement element) throws InterruptedException {
+        String value = element.getAttribute("value");
+        element.sendKeys(Keys.END);
+        for (int i = 0; i < value.length(); i++) {
+            element.sendKeys(Keys.BACK_SPACE);
+            Thread.sleep(50);
         }
         return element;
     }
