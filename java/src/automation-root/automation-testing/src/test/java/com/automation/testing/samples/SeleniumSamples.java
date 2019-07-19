@@ -273,4 +273,19 @@ public class SeleniumSamples {
         Thread.sleep(2000);
         driver.quit();
     }
+
+    @Test
+    public void submitFormSample() throws InterruptedException, MalformedURLException {
+        WebDriver driver = new WebDriverFactory(new DriverParams().setDriver("chrome").setBinaries("D:\\automation-env\\web-drivers")).get();
+
+        // extension object
+        WebDriverExtensions driverExtensions = new WebDriverExtensions(driver);
+
+        driverExtensions.goToUrl("https://gravitymvctestapplication.azurewebsites.net/Student");
+        WebElement element = driverExtensions.getEnabledElement(By.xpath("//input[@id='SearchString']"));
+        element.sendKeys("Alexander");
+        driverExtensions.submitForm(driver, 0);
+        Thread.sleep(2000);
+        driver.quit();
+    }
 }

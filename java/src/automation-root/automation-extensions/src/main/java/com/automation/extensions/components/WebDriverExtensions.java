@@ -121,4 +121,16 @@ public class WebDriverExtensions {
         }
         return element;
     }
+
+    public WebDriver submitForm(WebDriver driver, int index){
+        String script = String.format("document.forms[%d].submit();", index);
+        ((JavascriptExecutor)driver).executeScript(script);
+        return driver;
+    }
+
+    public WebDriver submitForm(WebDriver driver, String id){
+        String script = String.format("document.forms[%s].submit();", id);
+        ((JavascriptExecutor)driver).executeScript(script);
+        return driver;
+    }
 }
