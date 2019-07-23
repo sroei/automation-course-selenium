@@ -288,4 +288,16 @@ public class SeleniumSamples {
         Thread.sleep(2000);
         driver.quit();
     }
+
+    @Test
+    public void goToUrlRemoteSample() throws InterruptedException, MalformedURLException {
+        WebDriver driver = new WebDriverFactory(new DriverParams().setDriver("chrome").setSource("remote").setBinaries("http://localhost:4444/wd/hub")).get();
+
+        // extension object
+        WebDriverExtensions driverExtensions = new WebDriverExtensions(driver);
+
+        driverExtensions.goToUrl("https://gravitymvctestapplication.azurewebsites.net/");
+        Thread.sleep(2000);
+        driver.quit();
+    }
 }
