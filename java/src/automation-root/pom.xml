@@ -11,6 +11,10 @@
     <modules>
         <module>automation-extensions</module>
         <module>automation-testing</module>
+        <module>automation-core</module>
+        <module>automation-api</module>
+        <module>automation-framework-ui</module>
+        <module>automation-framework-rest</module>
     </modules>
 
     <dependencies>
