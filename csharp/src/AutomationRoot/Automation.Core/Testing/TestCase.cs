@@ -14,13 +14,24 @@ namespace Automation.Core.Testing
         private int attempts;
         private ILogger logger;
 
+        protected TestCase()
+        {
+            testParams = new Dictionary<string, object>();
+            attempts = 1;
+            logger = new TraceLogger();
+        }
+
         // components        
         public abstract bool AutomationTest(IDictionary<string, object> testParams);
 
         public TestCase Execute()
         {
+            Actual = AutomationTest(testParams);
             return this;
         }
+
+        // properties
+        public bool Actual { get; private set; }
 
         // configuration
         public TestCase WithTestParams(IDictionary<string, object> testParams)
