@@ -79,8 +79,32 @@ public abstract class FluentUi implements Fluent {
         Type t = new TypeToken<T>() {
         }.getType();
         Class c = Class.forName(t.getTypeName());
-        Constructor<?> ctr = c.getDeclaredConstructor(WebDriver.class, Logger.class);
+        Constructor<T> ctr = c.getDeclaredConstructor(WebDriver.class, Logger.class);
 
         return (T) ctr.newInstance(new Object[]{driver, logger});
+    }
+
+    private <T> Class generateClass() throws ClassNotFoundException {
+        // get type for generic
+        Type t = new TypeToken<T>() {
+        }.getType();
+
+        // return generated class
+        return Class.forName(t.getTypeName());
+    }
+
+    @SuppressWarnings("unchecked")
+    private <T> T generateObject(Class c, Logger logger)
+            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        // get constructor
+        Constructor<T> ctr = logger == null
+                ? c.getDeclaredConstructor(WebDriver.class)
+                : c.getDeclaredConstructor(WebDriver.class, Logger.class);
+
+        // get arguments
+        Object[] args = logger == null ? new Object[]{driver} : new Object[]{driver, logger};
+
+        // return new object instance
+        return ctr.newInstance(args);
     }
 }
