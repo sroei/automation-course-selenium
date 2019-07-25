@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace Automation.Core.Components
 {
-    public class FluentUi : IFluent
+    public abstract class FluentUi : IFluent
     {
         private readonly IWebDriver driver;
         private readonly ILogger logger;
 
-        public FluentUi(IWebDriver driver)
+        protected FluentUi(IWebDriver driver)
             : this(driver, new TraceLogger()) { }
 
-        public FluentUi(IWebDriver driver, ILogger logger)
+        protected FluentUi(IWebDriver driver, ILogger logger)
         {
             this.driver = driver;
             this.logger = logger;
@@ -24,12 +24,35 @@ namespace Automation.Core.Components
 
         public T ChangeContext<T>()
         {
-            throw new NotImplementedException();
+            var instance = Create<T>(null);
+            logger.Debug($"instance of [{GetType()?.FullName}] created");
+            return instance;
+        }
+
+        public T ChangeContext<T>(ILogger logger)
+        {
+            return Create<T>(logger);
+        }
+
+        public T ChangeContext<T>(string application, ILogger logger)
+        {
+            driver.Navigate().GoToUrl(application);
+            driver.Manage().Window.Maximize();
+            return Create<T>(logger);
         }
 
         public T ChangeContext<T>(string application)
         {
-            throw new NotImplementedException();
+            driver.Navigate().GoToUrl(application);
+            driver.Manage().Window.Maximize();
+            return Create<T>(null);
+        }
+
+        private T Create<T>(ILogger logger)
+        {
+            return logger == null
+                ? (T)Activator.CreateInstance(typeof(T), new object[] { driver })
+                : (T)Activator.CreateInstance(typeof(T), new object[] { driver, logger });
         }
     }
 }
