@@ -23,6 +23,14 @@ public abstract class FluentUi implements Fluent {
         this.logger = logger;
     }
 
+    public WebDriver getDriver() {
+        return driver;
+    }
+
+    public Logger getLogger() {
+        return logger;
+    }
+
     public <T> T changeContext()
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // factory
