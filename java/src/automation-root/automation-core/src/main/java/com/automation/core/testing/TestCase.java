@@ -2,6 +2,7 @@ package com.automation.core.testing;
 
 import com.automation.core.logging.Logger;
 import com.automation.core.logging.TraceLogger;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +26,23 @@ public abstract class TestCase {
     public abstract boolean automationTest(Map<String, Object> testParams);
 
     public TestCase execute() {
-        actual = automationTest(testParams);
+        for (int i = 0; i < attempts; i++) {
+            try {
+                actual = automationTest(testParams);
+                if (actual) {
+                    break;
+                }
+                logger.debug(String.format("[%s] failed on attempt [%d]", getClass().getName(), i));
+            } catch (NotImplementedException ex) {
+                logger.debug(ex, ex.getMessage());
+                break;
+            } catch (NullPointerException ex) {
+                logger.debug(ex, ex.toString());
+                break;
+            } catch (Exception ex) {
+                logger.debug(ex, ex.getMessage());
+            }
+        }
         return this;
     }
 
