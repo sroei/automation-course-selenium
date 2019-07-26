@@ -8,8 +8,11 @@ namespace Automation.Api.Components
 {
     public interface IStudent
     {
-        string FirstName { get; }
-        string LastName { get; }
-        DateTime EnrollmentDate { get; }
+        string FirstName();
+        string LastName();
+        DateTime EnrollementDate();
+        object Edit();
+        object Details();
+        object Delete();
     }
 }

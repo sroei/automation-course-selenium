@@ -9,6 +9,6 @@ namespace Automation.Api.Pages
 {
     public interface IStudents
     {
-        IEnumerable<IStudent> Students { get; }
+        IEnumerable<IStudent> Students();
     }
 }
