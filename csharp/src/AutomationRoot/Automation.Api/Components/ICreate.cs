@@ -6,5 +6,8 @@ using System.Threading.Tasks;
 
 namespace Automation.Api.Components
 {
-    public interface IStudent : IStudentDetails, IEntityActions { }
+    public interface ICreate<out T>
+    {
+        T Create();
+    }
 }
