@@ -6,5 +6,8 @@ using System.Threading.Tasks;
 
 namespace Automation.Api.Components
 {
-    public interface IStudent : IStudentDetails, IEntityActions { }
+    public interface IBack<out T>
+    {
+        T BackToList();
+    }
 }
