@@ -20,6 +20,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Automation.Api\Automation.Api.csproj" />
     <ProjectReference Include="..\Automation.Core\Automation.Core.csproj" />
+    <ProjectReference Include="..\Automation.Framework.Ui\Automation.Framework.Ui.csproj" />
   </ItemGroup>
 
 </Project>
