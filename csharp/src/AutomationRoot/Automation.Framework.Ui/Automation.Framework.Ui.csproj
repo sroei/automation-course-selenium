@@ -6,7 +6,11 @@
 
   <ItemGroup>
     <Folder Include="Components\" />
-    <Folder Include="Pages\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Automation.Api\Automation.Api.csproj" />
+    <ProjectReference Include="..\Automation.Core\Automation.Core.csproj" />
   </ItemGroup>
 
 </Project>
