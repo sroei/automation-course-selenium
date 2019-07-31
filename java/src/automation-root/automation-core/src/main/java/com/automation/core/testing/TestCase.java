@@ -4,6 +4,8 @@ import com.automation.core.logging.Logger;
 import com.automation.core.logging.TraceLogger;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,7 +25,7 @@ public abstract class TestCase {
     }
 
     // components
-    public abstract boolean automationTest(Map<String, Object> testParams);
+    public abstract boolean automationTest(Map<String, Object> testParams) throws MalformedURLException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException;
 
     public TestCase execute() {
         for (int i = 0; i < attempts; i++) {

@@ -9,16 +9,16 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 
-public abstract class FluentUi implements Fluent {
+public class FluentUi implements Fluent {
 
     private final WebDriver driver;
     private final Logger logger;
 
-    protected FluentUi(WebDriver driver) {
+    public FluentUi(WebDriver driver) {
         this(driver, new TraceLogger());
     }
 
-    protected FluentUi(WebDriver driver, Logger logger) {
+    public FluentUi(WebDriver driver, Logger logger) {
         this.driver = driver;
         this.logger = logger;
     }
