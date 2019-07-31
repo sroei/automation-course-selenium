@@ -1,5 +1,9 @@
 ﻿using Automation.Api.Pages;
+using Automation.Core.Components;
 using Automation.Core.Testing;
+using Automation.Extensions.Components;
+using Automation.Extensions.Contracts;
+using Automation.Framework.Ui.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +16,15 @@ namespace Automation.Testing.Cases
     {
         public override bool AutomationTest(IDictionary<string, object> testParams)
         {
-            IStudents students = null;
-            return students.FindByName("Alexander").Students().Any();
+            // creating driver for this case
+            var driver = new WebDriverFactory(new DriverParams { Binaries = ".", Driver = "CHROME" }).Get();
+
+            // perform test case
+            return new FluentUi(driver)
+                .ChangeContext<StudentsUi>("https://gravitymvctestapplication.azurewebsites.net/Student")
+                .FindByName("Alexander")
+                .Students()
+                .All(i => i.FirstName().Equals("Alexander") || i.LastName().Equals("Alexander"));
         }
     }
 }

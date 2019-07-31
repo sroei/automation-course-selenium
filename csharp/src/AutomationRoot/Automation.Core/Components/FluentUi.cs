@@ -4,12 +4,12 @@ using System;
 
 namespace Automation.Core.Components
 {
-    public abstract class FluentUi : IFluent
+    public class FluentUi : IFluent
     {
-        protected FluentUi(IWebDriver driver)
+        public FluentUi(IWebDriver driver)
             : this(driver, new TraceLogger()) { }
 
-        protected FluentUi(IWebDriver driver, ILogger logger)
+        public FluentUi(IWebDriver driver, ILogger logger)
         {
             Driver = driver;
             Logger = logger;
