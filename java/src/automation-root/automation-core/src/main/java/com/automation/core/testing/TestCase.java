@@ -21,8 +21,8 @@ public abstract class TestCase {
     private boolean actual;
     private WebDriver driver;
 
-    protected TestCase(){
-        testParams = new HashMap<String, Object>();
+    protected TestCase() {
+        testParams = new HashMap<>();
         attempts = 1;
         logger = new TraceLogger();
         actual = false;
@@ -31,8 +31,9 @@ public abstract class TestCase {
     // components
     public abstract boolean automationTest(Map<String, Object> testParams) throws MalformedURLException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException;
 
-    public TestCase execute() {
+    public TestCase execute() throws MalformedURLException {
         for (int i = 0; i < attempts; i++) {
+            driver = get();
             try {
                 actual = automationTest(testParams);
                 if (actual) {
@@ -48,16 +49,19 @@ public abstract class TestCase {
             } catch (Exception ex) {
                 logger.debug(ex, ex.getMessage());
             }
+            finally {
+                dispose();
+            }
         }
         return this;
     }
 
     // properties - get actual
-    public boolean getActual(){
+    public boolean getActual() {
         return actual;
     }
 
-    public WebDriver getDriver(){
+    public WebDriver getDriver() {
         return driver;
     }
 
@@ -67,12 +71,12 @@ public abstract class TestCase {
         return this;
     }
 
-    public TestCase withNumberOfAttempts(int numberOfAttempts){
+    public TestCase withNumberOfAttempts(int numberOfAttempts) {
         this.attempts = numberOfAttempts;
         return this;
     }
 
-    public TestCase withLogger(Logger logger){
+    public TestCase withLogger(Logger logger) {
         this.logger = logger;
         return this;
     }
@@ -80,17 +84,24 @@ public abstract class TestCase {
     // setup
     private WebDriver get() throws MalformedURLException {
         // constants
-        final String DRIVER =  "driver";
+        final String DRIVER = "driver";
 
         // default
         DriverParams driverParams = new DriverParams().setDriver("CHROME").setBinaries(".");
 
         // set driver if exists
-        if(testParams!=null && testParams.containsKey(DRIVER)){
+        if (testParams != null && testParams.containsKey(DRIVER)) {
             driverParams.setDriver(testParams.get(DRIVER).toString());
         }
 
         // generate driver
         return new WebDriverFactory(driverParams).get();
+    }
+
+    // cleanup
+    private void dispose() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 }
