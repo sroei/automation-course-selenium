@@ -17,13 +17,17 @@ public class SearchStudents extends TestCase {
             throws MalformedURLException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
 
         // create driver for this test case
-        WebDriver driver = new WebDriverFactory(new DriverParams().setBinaries(".").setDriver("CHROME")).get();
+        String driverParam = testParams.get("driver").toString();
+        String application = testParams.get("application").toString();
+        String keyword = testParams.get("keyword").toString();
+
+        WebDriver driver = new WebDriverFactory(new DriverParams().setBinaries(".").setDriver(driverParam)).get();
 
         return new FluentUi(driver)
-                .<StudentsUi>changeContext("https://gravitymvctestapplication.azurewebsites.net/Student")
-                .findByName("Alexander")
+                .<StudentsUi>changeContext(application)
+                .findByName(keyword)
                 .students()
                 .stream()
-                .allMatch(i -> i.firstName().contains("Alexander") || i.lastName().contains("Alexander"));
+                .allMatch(i -> i.firstName().contains(keyword) || i.lastName().contains(keyword));
     }
 }
