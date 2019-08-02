@@ -2,6 +2,9 @@ package com.automation.core.testing;
 
 import com.automation.core.logging.Logger;
 import com.automation.core.logging.TraceLogger;
+import com.automation.extensions.components.WebDriverFactory;
+import com.automation.extensions.contracts.DriverParams;
+import org.openqa.selenium.WebDriver;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.lang.reflect.InvocationTargetException;
@@ -16,6 +19,7 @@ public abstract class TestCase {
     private int attempts;
     private Logger logger;
     private boolean actual;
+    private WebDriver driver;
 
     protected TestCase(){
         testParams = new HashMap<String, Object>();
@@ -53,6 +57,10 @@ public abstract class TestCase {
         return actual;
     }
 
+    public WebDriver getDriver(){
+        return driver;
+    }
+
     // configurations
     public TestCase withTestParams(Map<String, Object> testParams) {
         this.testParams = testParams;
@@ -67,5 +75,22 @@ public abstract class TestCase {
     public TestCase withLogger(Logger logger){
         this.logger = logger;
         return this;
+    }
+
+    // setup
+    private WebDriver get() throws MalformedURLException {
+        // constants
+        final String DRIVER =  "driver";
+
+        // default
+        DriverParams driverParams = new DriverParams().setDriver("CHROME").setBinaries(".");
+
+        // set driver if exists
+        if(testParams!=null && testParams.containsKey(DRIVER)){
+            driverParams.setDriver(testParams.get(DRIVER).toString());
+        }
+
+        // generate driver
+        return new WebDriverFactory(driverParams).get();
     }
 }
