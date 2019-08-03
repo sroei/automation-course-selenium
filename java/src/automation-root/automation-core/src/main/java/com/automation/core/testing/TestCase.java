@@ -29,7 +29,8 @@ public abstract class TestCase {
     }
 
     // components
-    public abstract boolean automationTest(Map<String, Object> testParams) throws MalformedURLException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException;
+    public abstract boolean automationTest(Map<String, Object> testParams)
+            throws MalformedURLException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException;
 
     public TestCase execute() throws MalformedURLException {
         for (int i = 0; i < attempts; i++) {

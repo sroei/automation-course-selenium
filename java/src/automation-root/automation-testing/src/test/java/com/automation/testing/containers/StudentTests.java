@@ -8,12 +8,13 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.lang.reflect.Type;
+import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.Map;
 
 public class StudentTests {
     @Test(dataProvider = "students-data-provider")
-    public void searchStudentUiTest(Map<String, Object> testParams) {
+    public void searchStudentUiTest(Map<String, Object> testParams) throws MalformedURLException {
         // execute & get actual result
         boolean actual = new SearchStudents().withTestParams(testParams).execute().getActual();
 
