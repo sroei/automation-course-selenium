@@ -15,16 +15,17 @@ public class CreateStudent extends TestCase {
 
         // create driver for this test case
         String application = testParams.get("application").toString();
-        String keyword = testParams.get("keyword").toString();
+        String firstName = testParams.get("firstName").toString();
+        String lastName = testParams.get("lastName").toString();
 
         return new FluentUi(getDriver())
                 .<StudentsUi>changeContext(application)
                 .create()
-                .firstName("java")
-                .lastName("student")
+                .firstName(firstName)
+                .lastName(lastName)
                 .enrollmentDate(LocalDateTime.now())
                 .create()
-                .findByName("java")
+                .findByName(firstName)
                 .students()
                 .size() > 0;
     }
