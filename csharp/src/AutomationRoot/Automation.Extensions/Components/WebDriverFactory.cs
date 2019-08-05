@@ -7,8 +7,6 @@ using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.IE;
 using OpenQA.Selenium.Remote;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Automation.Extensions.Components
 {
