@@ -1,12 +1,10 @@
 ﻿using Automation.Api.Components;
 using Automation.Api.Pages;
 using Automation.Core.Components;
+using Automation.Extensions.Components;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Automation.Framework.Ui.Pages
 {
@@ -25,7 +23,9 @@ namespace Automation.Framework.Ui.Pages
 
         public IStudents FindByName(string name)
         {
-            throw new NotImplementedException();
+            Driver.GetEnabledElement(By.XPath("//input[@id='SearchString']")).SendKeys(name);
+            Driver.SubmitForm(0);
+            return this;
         }
 
         public T Menu<T>(string menuName)
