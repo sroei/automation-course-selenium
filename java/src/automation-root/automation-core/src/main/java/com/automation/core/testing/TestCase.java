@@ -86,13 +86,14 @@ public abstract class TestCase {
     private WebDriver get() throws MalformedURLException {
         // constants
         final String DRIVER = "driver";
+        final String BINARIES = "driverBinaries";
 
         // default
         DriverParams driverParams = new DriverParams().setDriver("CHROME").setBinaries(".");
 
         // set driver if exists
         if (testParams != null && testParams.containsKey(DRIVER)) {
-            driverParams.setDriver(testParams.get(DRIVER).toString());
+            driverParams.setDriver(testParams.get(DRIVER).toString()).setBinaries(testParams.get(BINARIES).toString());
         }
 
         // generate driver

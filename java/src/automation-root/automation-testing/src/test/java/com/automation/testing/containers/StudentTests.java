@@ -34,6 +34,7 @@ public class StudentTests {
         // data to pass as test parameters
         String json = "{" +
                 "'driver':'CHROME'," +
+                "'driverBinaries':'D:\\\\automation-env\\\\web-drivers'," +
                 "'application':'https://gravitymvctestapplication.azurewebsites.net/Student'," +
                 "'keyword':'Alexander'" +
                 "}";
@@ -47,6 +48,7 @@ public class StudentTests {
         // data to pass as test parameters
         String json = "{" +
                 "'driver':'CHROME'," +
+                "'driverBinaries':'D:\\\\automation-env\\\\web-drivers'," +
                 "'application':'https://gravitymvctestapplication.azurewebsites.net/Student'," +
                 "'firstName':'java'," +
                 "'lastName':'student'" +
