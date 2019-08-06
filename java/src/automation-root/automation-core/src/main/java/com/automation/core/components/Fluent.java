@@ -5,15 +5,15 @@ import com.automation.core.logging.Logger;
 import java.lang.reflect.InvocationTargetException;
 
 public interface Fluent {
-    <T> T changeContext(Logger logger)
+    <T> T changeContext(Class c, Logger logger)
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 
-    <T> T changeContext()
+    <T> T changeContext(Class c)
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 
-    <T> T changeContext(String application, Logger logger)
+    <T> T changeContext(Class c, String application, Logger logger)
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 
-    <T> T changeContext(String application)
+    <T> T changeContext(Class c, String application)
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 }

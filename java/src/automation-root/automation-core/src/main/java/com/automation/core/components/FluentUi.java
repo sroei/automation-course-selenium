@@ -2,12 +2,10 @@ package com.automation.core.components;
 
 import com.automation.core.logging.Logger;
 import com.automation.core.logging.TraceLogger;
-import com.google.gson.reflect.TypeToken;
 import org.openqa.selenium.WebDriver;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Type;
 
 public class FluentUi implements Fluent {
 
@@ -31,46 +29,36 @@ public class FluentUi implements Fluent {
         return logger;
     }
 
-    public <T> T changeContext()
+    public <T> T changeContext(Class c)
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // factory
-        return generateObject(generateClass(), null);
+        return generateObject(c, null);
     }
 
-    public <T> T changeContext(Logger logger)
+    public <T> T changeContext(Class c, Logger logger)
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // factory
-        return generateObject(generateClass(), logger);
+        return generateObject(c, logger);
     }
 
-    public <T> T changeContext(String application)
+    public <T> T changeContext(Class c, String application)
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // navigate
         driver.navigate().to(application);
         driver.manage().window().maximize();
 
         // factory
-        return generateObject(generateClass(), null);
+        return generateObject(c, null);
     }
 
-    public <T> T changeContext(String application, Logger logger)
+    public <T> T changeContext(Class c, String application, Logger logger)
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // navigation
         driver.navigate().to(application);
         driver.manage().window().maximize();
 
         // factory
-        return generateObject(generateClass(), logger);
-    }
-
-    private <T> Class generateClass()
-            throws ClassNotFoundException {
-        // get type for generic
-        Type t = new TypeToken<T>() {
-        }.getType();
-
-        // return generated class
-        return Class.forName(t.getTypeName());
+        return generateObject(c, logger);
     }
 
     @SuppressWarnings("unchecked")

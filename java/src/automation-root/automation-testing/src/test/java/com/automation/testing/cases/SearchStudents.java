@@ -1,5 +1,6 @@
 package com.automation.testing.cases;
 
+import com.automation.api.pages.Students;
 import com.automation.core.components.FluentUi;
 import com.automation.core.testing.TestCase;
 import com.automation.framework.ui.pages.StudentsUi;
@@ -17,7 +18,7 @@ public class SearchStudents extends TestCase {
         String keyword = testParams.get("keyword").toString();
 
         return new FluentUi(getDriver())
-                .<StudentsUi>changeContext(application)
+                .<Students>changeContext(StudentsUi.class, application)
                 .findByName(keyword)
                 .students()
                 .stream()
