@@ -5,7 +5,9 @@ import com.automation.api.pages.CreateStudent;
 import com.automation.api.pages.Students;
 import com.automation.core.components.FluentUi;
 import com.automation.core.logging.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.List;
 
@@ -20,7 +22,11 @@ public class StudentsUi extends FluentUi implements Students {
 
     @Override
     public Students findByName(String name) {
-        return null;
+        WebElement element = getDriverExtensions().getEnabledElement(By.xpath("//input[@id='SearchString']"));
+        element.sendKeys("Alexander");
+        getDriverExtensions().submitForm(0);
+
+        return this;
     }
 
     @Override

@@ -284,7 +284,7 @@ public class SeleniumSamples {
         driverExtensions.goToUrl("https://gravitymvctestapplication.azurewebsites.net/Student");
         WebElement element = driverExtensions.getEnabledElement(By.xpath("//input[@id='SearchString']"));
         element.sendKeys("Alexander");
-        driverExtensions.submitForm(driver, 0);
+        driverExtensions.submitForm(0);
         Thread.sleep(2000);
         driver.quit();
     }
