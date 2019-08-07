@@ -2,6 +2,7 @@ package com.automation.core.components;
 
 import com.automation.core.logging.Logger;
 import com.automation.core.logging.TraceLogger;
+import com.automation.extensions.components.WebDriverExtensions;
 import org.openqa.selenium.WebDriver;
 
 import java.lang.reflect.Constructor;
@@ -11,6 +12,7 @@ public class FluentUi implements Fluent {
 
     private final WebDriver driver;
     private final Logger logger;
+    private WebDriverExtensions driverExtensions;
 
     public FluentUi(WebDriver driver) {
         this(driver, new TraceLogger());
@@ -19,6 +21,7 @@ public class FluentUi implements Fluent {
     public FluentUi(WebDriver driver, Logger logger) {
         this.driver = driver;
         this.logger = logger;
+        driverExtensions = new WebDriverExtensions(driver);
     }
 
     public WebDriver getDriver() {
@@ -27,6 +30,10 @@ public class FluentUi implements Fluent {
 
     public Logger getLogger() {
         return logger;
+    }
+
+    public WebDriverExtensions getDriverExtensions(){
+        return driverExtensions;
     }
 
     public <T> T changeContext(Class c)
