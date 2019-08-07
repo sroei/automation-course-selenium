@@ -10,11 +10,18 @@ using System.Threading.Tasks;
 
 namespace Automation.Framework.Ui.Components
 {
-    public class StudentUi:FluentUi, IStudent
+    public class StudentUi : FluentUi, IStudent
     {
-        public StudentUi(IWebDriver driver) : this(driver, new TraceLogger()) { }
+        private readonly IWebElement dataRow;
 
-        public StudentUi(IWebDriver driver, ILogger logger) : base(driver, logger) { }
+        public StudentUi(IWebDriver driver, IWebElement dataRow)
+            : this(driver, new TraceLogger())
+        {
+            this.dataRow = dataRow;
+        }
+
+        private StudentUi(IWebDriver driver, ILogger logger)
+            : base(driver, logger) { }
 
         // actions
         public object Delete()
