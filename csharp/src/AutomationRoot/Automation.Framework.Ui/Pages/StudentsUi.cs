@@ -6,6 +6,7 @@ using Automation.Framework.Ui.Components;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Automation.Framework.Ui.Pages
 {
@@ -56,7 +57,8 @@ namespace Automation.Framework.Ui.Pages
 
         public IEnumerable<IStudent> Students()
         {
-            return new StudentUi[0];
+            var students = Driver.GetElements(By.XPath("//tbody/tr"));
+            return students.Select(i => new StudentUi(Driver, i));
         }
     }
 }
