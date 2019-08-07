@@ -5,10 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Components\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\Automation.Api\Automation.Api.csproj" />
     <ProjectReference Include="..\Automation.Core\Automation.Core.csproj" />
   </ItemGroup>
