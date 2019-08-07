@@ -33,7 +33,18 @@ public class StudentsUi extends FluentUi implements Students {
 
     @Override
     public List<Student> students() {
-        return new ArrayList<>();
+        // initialize result
+        ArrayList<Student> students = new ArrayList<>();
+
+        // get all data-rows
+        List<WebElement> dataRows = getDriverExtensions().getElements(By.xpath("//tbody/tr"));
+
+        // iterate & build students
+        for (int i = 0; i < dataRows.size(); i++) {
+            Student student = new StudentUi(getDriver(), dataRows.get(i));
+            students.add(student);
+        }
+        return students;
     }
 
     @Override
