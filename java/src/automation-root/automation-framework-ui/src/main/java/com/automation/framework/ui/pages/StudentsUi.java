@@ -9,6 +9,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentsUi extends FluentUi implements Students {
@@ -31,7 +32,7 @@ public class StudentsUi extends FluentUi implements Students {
 
     @Override
     public List<Student> students() {
-        return null;
+        return new ArrayList<>();
     }
 
     @Override
