@@ -5,6 +5,7 @@ import com.automation.api.pages.CreateStudent;
 import com.automation.api.pages.Students;
 import com.automation.core.components.FluentUi;
 import com.automation.core.logging.Logger;
+import com.automation.framework.ui.components.StudentUi;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

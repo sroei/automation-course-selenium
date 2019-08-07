@@ -5,15 +5,19 @@ import com.automation.core.components.FluentUi;
 import com.automation.core.logging.Logger;
 import com.automation.core.logging.TraceLogger;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.time.LocalDateTime;
 
 public class StudentUi extends FluentUi implements Student {
-    public StudentUi(WebDriver driver) {
+    private WebElement dataRow;
+
+    public StudentUi(WebDriver driver, WebElement dataRow) {
         this(driver, new TraceLogger());
+        this.dataRow = dataRow;
     }
 
-    public StudentUi(WebDriver driver, Logger logger) {
+    private StudentUi(WebDriver driver, Logger logger) {
         super(driver, logger);
     }
 
