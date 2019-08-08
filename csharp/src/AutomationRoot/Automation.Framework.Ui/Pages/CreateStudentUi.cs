@@ -22,7 +22,8 @@ namespace Automation.Framework.Ui.Pages
 
         public IStudents Create()
         {
-            throw new NotImplementedException();
+            Driver.GetEnabledElement(By.XPath("//input[@type='submit']")).Click();
+            return new StudentsUi(Driver);
         }
 
         public DateTime EnrollementDate()
