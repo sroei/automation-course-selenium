@@ -49,7 +49,8 @@ public class StudentsUi extends FluentUi implements Students {
 
     @Override
     public CreateStudent create() {
-        return null;
+        getDriverExtensions().getEnabledElement(By.xpath("//a[contains(@href,'/Student/Create')]")).click();
+        return new CreateStudentUi(getDriver());
     }
 
     @Override
