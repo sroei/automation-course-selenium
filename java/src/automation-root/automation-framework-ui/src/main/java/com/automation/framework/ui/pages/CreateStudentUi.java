@@ -4,6 +4,7 @@ import com.automation.api.pages.CreateStudent;
 import com.automation.api.pages.Students;
 import com.automation.core.components.FluentUi;
 import com.automation.core.logging.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.time.LocalDateTime;
@@ -44,12 +45,14 @@ public class CreateStudentUi extends FluentUi implements CreateStudent {
 
     @Override
     public CreateStudent firstName(String fName) {
-        return null;
+        getDriverExtensions().getEnabledElement(By.xpath("//input[@id='FirstMidName']")).sendKeys(fName);
+        return this;
     }
 
     @Override
     public CreateStudent lastName(String lName) {
-        return null;
+        getDriverExtensions().getEnabledElement(By.xpath("//input[@id='LastName']")).sendKeys(lName);
+        return this;
     }
 
     @Override
