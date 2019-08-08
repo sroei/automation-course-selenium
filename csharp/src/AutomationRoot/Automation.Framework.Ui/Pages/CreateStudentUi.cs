@@ -32,7 +32,9 @@ namespace Automation.Framework.Ui.Pages
 
         public ICreateStudent EnrollementDate(DateTime enrollementDate)
         {
-            throw new NotImplementedException();
+            var script = $"document.getElementById('EnrollmentDate').setAttribute('value','{enrollementDate.ToString("yyyy-MM-dd")}');";
+            ((IJavaScriptExecutor)Driver).ExecuteScript(script);
+            return this;
         }
 
         public string FirstName()
