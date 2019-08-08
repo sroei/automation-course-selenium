@@ -25,7 +25,7 @@ public class StudentsUi extends FluentUi implements Students {
     @Override
     public Students findByName(String name) {
         WebElement element = getDriverExtensions().getEnabledElement(By.xpath("//input[@id='SearchString']"));
-        element.sendKeys("Alexander");
+        element.sendKeys(name);
         getDriverExtensions().submitForm(0);
 
         return this;

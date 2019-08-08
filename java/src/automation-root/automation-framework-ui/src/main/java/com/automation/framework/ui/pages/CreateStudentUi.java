@@ -28,7 +28,8 @@ public class CreateStudentUi extends FluentUi implements CreateStudent {
 
     @Override
     public Students create() {
-        return null;
+        getDriverExtensions().getEnabledElement(By.xpath("//input[@type='submit']")).click();
+        return new StudentsUi(getDriver());
     }
 
     @Override
