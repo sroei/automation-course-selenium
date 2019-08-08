@@ -5,9 +5,12 @@ import com.automation.api.pages.Students;
 import com.automation.core.components.FluentUi;
 import com.automation.core.logging.Logger;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class CreateStudentUi extends FluentUi implements CreateStudent {
     public CreateStudentUi(WebDriver driver) {
@@ -57,6 +60,13 @@ public class CreateStudentUi extends FluentUi implements CreateStudent {
 
     @Override
     public CreateStudent enrollmentDate(LocalDateTime eDate) {
-        return null;
+        // parse date
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String localDate = eDate.toLocalDate().format(formatter);
+
+        // JS
+        String script = String.format("document.getElementById('EnrollmentDate').setAttribute('value','%s');", localDate);
+        ((JavascriptExecutor)getDriver()).executeScript(script);
+        return this;
     }
 }
