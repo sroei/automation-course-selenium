@@ -8,10 +8,9 @@ import org.openqa.selenium.WebDriver;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
-public class FluentUi implements Fluent {
+public class FluentUi extends FluentBase {
 
     private final WebDriver driver;
-    private final Logger logger;
     private WebDriverExtensions driverExtensions;
 
     public FluentUi(WebDriver driver) {
@@ -19,8 +18,8 @@ public class FluentUi implements Fluent {
     }
 
     public FluentUi(WebDriver driver, Logger logger) {
+        super(logger);
         this.driver = driver;
-        this.logger = logger;
         driverExtensions = new WebDriverExtensions(driver);
     }
 
@@ -28,26 +27,25 @@ public class FluentUi implements Fluent {
         return driver;
     }
 
-    public Logger getLogger() {
-        return logger;
-    }
-
-    public WebDriverExtensions getDriverExtensions(){
+    public WebDriverExtensions getDriverExtensions() {
         return driverExtensions;
     }
 
+    @Override
     public <T> T changeContext(Class c)
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // factory
         return generateObject(c, null);
     }
 
+    @Override
     public <T> T changeContext(Class c, Logger logger)
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // factory
         return generateObject(c, logger);
     }
 
+    @Override
     public <T> T changeContext(Class c, String application)
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // navigate
@@ -58,6 +56,7 @@ public class FluentUi implements Fluent {
         return generateObject(c, null);
     }
 
+    @Override
     public <T> T changeContext(Class c, String application, Logger logger)
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // navigation
@@ -69,7 +68,8 @@ public class FluentUi implements Fluent {
     }
 
     @SuppressWarnings("unchecked")
-    private <T> T generateObject(Class c, Logger logger)
+    @Override
+    <T> T generateObject(Class c, Logger logger)
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         // get constructor
         Constructor<T> ctr = logger == null
