@@ -1,4 +1,6 @@
 ﻿using Automation.Core.Logging;
+using Automation.Extensions.Components;
+using Automation.Extensions.Contracts;
 using OpenQA.Selenium;
 using System;
 
@@ -6,6 +8,15 @@ namespace Automation.Core.Components
 {
     public class FluentUi : FluentBase
     {
+        public FluentUi(string driverParams)
+            : this(new WebDriverFactory(driverParams).Get()) { }
+
+        public FluentUi(DriverParams driverParams)
+            : this(new WebDriverFactory(driverParams).Get()) { }
+
+        public FluentUi(WebDriverFactory webDriverFactory)
+            : this(webDriverFactory.Get()) { }
+
         public FluentUi(IWebDriver driver)
             : this(driver, new TraceLogger()) { }
 
