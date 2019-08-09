@@ -8,36 +8,29 @@ using Automation.Core.Logging;
 
 namespace Automation.Core.Components
 {
-    public class FluentRestApi : IFluent
+    public class FluentRestApi : FluentBase
     {
         public FluentRestApi(HttpClient httpClient)
             : this(httpClient, new TraceLogger()) { }
 
-        public FluentRestApi(HttpClient httpClient, ILogger logger)
+        public FluentRestApi(HttpClient httpClient, ILogger logger) : base(logger)
         {
             HttpClient = httpClient;
-            Logger = logger;
         }
 
         public HttpClient HttpClient { get; }
-        public ILogger Logger { get; }
 
-        public T ChangeContext<T>()
+        public override T ChangeContext<T>(string application, ILogger logger)
         {
             throw new NotImplementedException();
         }
 
-        public T ChangeContext<T>(ILogger logger)
+        public override T ChangeContext<T>(string application)
         {
             throw new NotImplementedException();
         }
 
-        public T ChangeContext<T>(string application, ILogger logger)
-        {
-            throw new NotImplementedException();
-        }
-
-        public T ChangeContext<T>(string application)
+        internal override T Create<T>(ILogger logger)
         {
             throw new NotImplementedException();
         }
