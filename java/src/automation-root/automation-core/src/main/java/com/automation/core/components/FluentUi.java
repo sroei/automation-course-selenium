@@ -3,15 +3,30 @@ package com.automation.core.components;
 import com.automation.core.logging.Logger;
 import com.automation.core.logging.TraceLogger;
 import com.automation.extensions.components.WebDriverExtensions;
+import com.automation.extensions.components.WebDriverFactory;
+import com.automation.extensions.contracts.DriverParams;
 import org.openqa.selenium.WebDriver;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
 
 public class FluentUi extends FluentBase {
 
     private final WebDriver driver;
     private WebDriverExtensions driverExtensions;
+
+    public FluentUi(String driverParams) throws MalformedURLException {
+        this(new WebDriverFactory(driverParams).get());
+    }
+
+    public FluentUi(DriverParams driverParams) throws MalformedURLException {
+        this(new WebDriverFactory(driverParams).get());
+    }
+
+    public FluentUi(WebDriverFactory webDriverFactory) throws MalformedURLException {
+        this(webDriverFactory.get());
+    }
 
     public FluentUi(WebDriver driver) {
         this(driver, new TraceLogger());
