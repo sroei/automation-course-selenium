@@ -32,20 +32,6 @@ public class FluentUi extends FluentBase {
     }
 
     @Override
-    public <T> T changeContext(Class c)
-            throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        // factory
-        return generateObject(c, null);
-    }
-
-    @Override
-    public <T> T changeContext(Class c, Logger logger)
-            throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        // factory
-        return generateObject(c, logger);
-    }
-
-    @Override
     public <T> T changeContext(Class c, String application)
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // navigate
