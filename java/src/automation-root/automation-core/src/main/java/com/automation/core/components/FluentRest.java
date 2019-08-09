@@ -8,37 +8,20 @@ import org.openqa.selenium.WebDriver;
 
 import java.lang.reflect.InvocationTargetException;
 
-public class FluentRest implements Fluent {
+public class FluentRest extends FluentBase {
     private final OkHttpClient httpClient;
-    private final Logger logger;
 
     public FluentRest(OkHttpClient httpClient) {
         this(httpClient, new TraceLogger());
     }
 
     public FluentRest(OkHttpClient httpClient, Logger logger) {
+        super(logger);
         this.httpClient = httpClient;
-        this.logger = logger;
     }
 
     public OkHttpClient getHttpClient() {
         return httpClient;
-    }
-
-    public Logger getLogger() {
-        return logger;
-    }
-
-    @Override
-    public <T> T changeContext(Class c, Logger logger)
-            throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        return null;
-    }
-
-    @Override
-    public <T> T changeContext(Class c)
-            throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        return null;
     }
 
     @Override
@@ -50,6 +33,12 @@ public class FluentRest implements Fluent {
     @Override
     public <T> T changeContext(Class c, String application)
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        return null;
+    }
+
+    @Override
+    <T> T generateObject(Class c, Logger logger)
+            throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         return null;
     }
 }

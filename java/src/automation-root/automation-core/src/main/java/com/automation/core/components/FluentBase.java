@@ -26,18 +26,18 @@ public abstract class FluentBase implements Fluent {
     }
 
     @Override
-    public abstract  <T> T changeContext(Class c, String application, Logger logger)
-            throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
-
-    @Override
-    public abstract <T> T changeContext(Class c, String application) throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
-
-    @Override
     public <T> T changeContext(Class c, Logger logger)
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // factory
         return generateObject(c, logger);
     }
+
+    @Override
+    public abstract  <T> T changeContext(Class c, String application, Logger logger)
+            throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+
+    @Override
+    public abstract <T> T changeContext(Class c, String application) throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 
     abstract <T> T generateObject(Class c, Logger logger)
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException;
