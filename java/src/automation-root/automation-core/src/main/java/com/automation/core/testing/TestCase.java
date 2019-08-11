@@ -4,7 +4,9 @@ import com.automation.core.logging.Logger;
 import com.automation.core.logging.TraceLogger;
 import com.automation.extensions.components.WebDriverFactory;
 import com.automation.extensions.contracts.DriverParams;
+import okhttp3.OkHttpClient;
 import org.openqa.selenium.WebDriver;
+import sun.net.www.http.HttpClient;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.lang.reflect.InvocationTargetException;
@@ -20,6 +22,7 @@ public abstract class TestCase {
     private Logger logger;
     private boolean actual;
     private WebDriver driver;
+    private OkHttpClient httpClient;
 
     protected TestCase() {
         testParams = new HashMap<>();
@@ -34,7 +37,7 @@ public abstract class TestCase {
 
     public TestCase execute() throws MalformedURLException {
         for (int i = 0; i < attempts; i++) {
-            driver = get();
+            setup();
             try {
                 actual = automationTest(testParams);
                 if (actual) {
@@ -66,6 +69,10 @@ public abstract class TestCase {
         return driver;
     }
 
+    public OkHttpClient getHttpClient(){
+        return httpClient;
+    }
+
     // configurations
     public TestCase withTestParams(Map<String, Object> testParams) {
         this.testParams = testParams;
@@ -83,7 +90,7 @@ public abstract class TestCase {
     }
 
     // setup
-    private WebDriver get() throws MalformedURLException {
+    private void setup() throws MalformedURLException {
         // constants
         final String DRIVER = "driver";
         final String BINARIES = "driverBinaries";
@@ -94,10 +101,17 @@ public abstract class TestCase {
         // set driver if exists
         if (testParams != null && testParams.containsKey(DRIVER)) {
             driverParams.setDriver(testParams.get(DRIVER).toString()).setBinaries(testParams.get(BINARIES).toString());
+        } else {
+            assert testParams != null;
+            testParams.put(DRIVER, "");
+        }
+        if (testParams != null && testParams.get(DRIVER).toString().equals("HTTP")) {
+            httpClient = new OkHttpClient();
+            return;
         }
 
         // generate driver
-        return new WebDriverFactory(driverParams).get();
+        driver = new WebDriverFactory(driverParams).get();
     }
 
     // cleanup
