@@ -34,7 +34,9 @@ namespace Automation.Core.Components
 
         public override T ChangeContext<T>(string type, string application)
         {
-            throw new NotImplementedException();
+            var t = GetTypeByName(type);
+            HttpClient.BaseAddress = new Uri(application);
+            return Create<T>(t, null);
         }
 
         internal override T Create<T>(Type type, ILogger logger)
