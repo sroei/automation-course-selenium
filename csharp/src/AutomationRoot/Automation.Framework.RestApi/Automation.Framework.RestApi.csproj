@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Components\" />
-    <Folder Include="Pages\" />
+    <ProjectReference Include="..\Automation.Api\Automation.Api.csproj" />
+    <ProjectReference Include="..\Automation.Core\Automation.Core.csproj" />
   </ItemGroup>
 
 </Project>
