@@ -50,6 +50,19 @@ public class FluentRest extends FluentBase {
         return generateObject(c, null);
     }
 
+    @Override
+    public <T> T changeContext(String type, String application)
+            throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+        // generate class
+        Class c = Class.forName(type);
+
+        // set base url
+        baseUrl = application;
+
+        // factory
+        return generateObject(c, null);
+    }
+
     @SuppressWarnings("unchecked")
     @Override
     <T> T generateObject(Class c, Logger logger)
