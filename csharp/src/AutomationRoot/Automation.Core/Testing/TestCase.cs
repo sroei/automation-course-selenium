@@ -5,6 +5,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
+using System.Net.Http;
 
 namespace Automation.Core.Testing
 {
@@ -29,7 +30,7 @@ namespace Automation.Core.Testing
         {
             for (int i = 0; i < attempts; i++)
             {
-                Driver = Get();
+                Setup();
                 try
                 {
                     Actual = AutomationTest(testParams);
@@ -39,12 +40,12 @@ namespace Automation.Core.Testing
                     }
                     logger.Debug($"[{GetType()?.FullName}] failed on attempt [{i + 1}]");
                 }
-                catch(AssertInconclusiveException ex)
+                catch (AssertInconclusiveException ex)
                 {
                     logger.Debug(ex, ex.Message);
                     break;
                 }
-                catch(NotImplementedException ex)
+                catch (NotImplementedException ex)
                 {
                     logger.Debug(ex, ex.Message);
                     break;
@@ -67,6 +68,8 @@ namespace Automation.Core.Testing
 
         public IWebDriver Driver { get; private set; }
 
+        public HttpClient HttpClient { get; private set; }
+
         // configuration
         public TestCase WithTestParams(IDictionary<string, object> testParams)
         {
@@ -87,7 +90,7 @@ namespace Automation.Core.Testing
         }
 
         // setup
-        private IWebDriver Get()
+        private void Setup()
         {
             // constants
             const string DRIVER = "driver";
@@ -100,9 +103,18 @@ namespace Automation.Core.Testing
             {
                 driverParams.Driver = $"{testParams[DRIVER]}";
             }
+            else
+            {
+                testParams[DRIVER] = string.Empty;
+            }
+            if ($"{testParams[DRIVER]}".Equals("HTTP", StringComparison.OrdinalIgnoreCase))
+            {
+                HttpClient = new HttpClient();
+                return;
+            }
 
             // create driver
-            return new WebDriverFactory(driverParams).Get();
+            Driver = new WebDriverFactory(driverParams).Get();
         }
     }
 }
