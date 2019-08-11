@@ -18,20 +18,22 @@ namespace Automation.Core.Components
 
         public T ChangeContext<T>()
         {
-            var instance = Create<T>(null);
+            var instance = Create<T>(null, null);
             Logger.Debug($"instance of [{GetType()?.FullName}] created");
             return instance;
         }
 
         public T ChangeContext<T>(ILogger logger)
         {
-            return Create<T>(logger);
+            return Create<T>(null, logger);
         }
 
         public abstract T ChangeContext<T>(string application, ILogger logger);
 
         public abstract T ChangeContext<T>(string application);
 
-        internal abstract T Create<T>(ILogger logger);
+        public abstract T ChangeContext<T>(string type, string application);
+
+        internal abstract T Create<T>(Type type, ILogger logger);
     }
 }
