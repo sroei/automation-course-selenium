@@ -4,6 +4,7 @@ import com.automation.api.components.Enrollment;
 import com.automation.api.pages.StudentDetails;
 import com.automation.core.components.FluentUi;
 import com.automation.core.logging.Logger;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 import java.time.LocalDateTime;
@@ -24,7 +25,7 @@ public class StudentDetailsUi extends FluentUi implements StudentDetails {
 
     @Override
     public String firstName() {
-        return null;
+        return getDriverExtensions().getElement(By.xpath("//dd[2]")).getText().trim();
     }
 
     @Override
