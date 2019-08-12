@@ -2,6 +2,7 @@ package com.automation.testing.containers;
 
 import com.automation.testing.cases.CreateStudent;
 import com.automation.testing.cases.SearchStudents;
+import com.automation.testing.cases.StudentDetails;
 import com.automation.testing.tools.Utilities;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
@@ -29,18 +30,18 @@ public class StudentTests {
         Assert.assertTrue(actual);
     }
 
+    @Test(dataProvider = "details-data-provider")
+    public void studentDetailsTest(Map<String, Object> testParams) throws MalformedURLException {
+        // execute & get actual result
+        boolean actual = new StudentDetails().withTestParams(testParams).execute().getActual();
+
+        //  assert actual
+        Assert.assertTrue(actual);
+    }
+
     @DataProvider(name = "search-data-provider")
     public Object[][] searchStudentProvider() {
-        // data to pass as test parameters
-        String json = "{" +
-                "'driver':'CHROME'," +
-                "'driverBinaries':'D:\\\\automation-env\\\\web-drivers'," +
-                "'application':'https://gravitymvctestapplication.azurewebsites.net/Student'," +
-                "'keyword':'Alexander'" +
-                "}";
-
-        // return data-provider
-        return Utilities.dataProviderFactory(json);
+        return searchProvider();
     }
 
     @DataProvider(name = "create-data-provider")
@@ -52,6 +53,24 @@ public class StudentTests {
                 "'application':'https://gravitymvctestapplication.azurewebsites.net/Student'," +
                 "'firstName':'java'," +
                 "'lastName':'student'" +
+                "}";
+
+        // return data-provider
+        return Utilities.dataProviderFactory(json);
+    }
+
+    @DataProvider(name = "details-data-provider")
+    public Object[][] studentDetailsProvider() {
+        return searchProvider();
+    }
+
+    private Object[][] searchProvider(){
+        // data to pass as test parameters
+        String json = "{" +
+                "'driver':'CHROME'," +
+                "'driverBinaries':'D:\\\\automation-env\\\\web-drivers'," +
+                "'application':'https://gravitymvctestapplication.azurewebsites.net/Student'," +
+                "'keyword':'Alexander'" +
                 "}";
 
         // return data-provider
