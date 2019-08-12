@@ -2,6 +2,7 @@
 using Automation.Api.Pages;
 using Automation.Core.Components;
 using Automation.Core.Logging;
+using Automation.Extensions.Components;
 using OpenQA.Selenium;
 using System;
 using System.Collections.Generic;
@@ -31,7 +32,7 @@ namespace Automation.Framework.Ui.Pages
 
         public string FirstName()
         {
-            throw new NotImplementedException();
+            return Driver.GetElement(By.XPath("//dd[2]")).Text.Trim();
         }
 
         public string LastName()
