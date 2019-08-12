@@ -2,7 +2,7 @@ package com.automation.api.components;
 
 import java.time.LocalDateTime;
 
-public interface StudentDetails {
+public interface PersonalDetails {
     String firstName();
 
     String lastName();
