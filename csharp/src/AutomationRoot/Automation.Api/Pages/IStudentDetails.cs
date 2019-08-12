@@ -7,7 +7,8 @@ using System.Threading.Tasks;
 
 namespace Automation.Api.Pages
 {
-    public interface IStudentDetails: IPersonalDetails
+    public interface IStudentDetails : IPersonalDetails
     {
+        IEnrollment[] Enrollments();
     }
 }
