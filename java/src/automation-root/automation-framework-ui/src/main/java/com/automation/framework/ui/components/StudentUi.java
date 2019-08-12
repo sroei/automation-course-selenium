@@ -1,9 +1,11 @@
 package com.automation.framework.ui.components;
 
 import com.automation.api.components.Student;
+import com.automation.api.pages.StudentDetails;
 import com.automation.core.components.FluentUi;
 import com.automation.core.logging.Logger;
 import com.automation.core.logging.TraceLogger;
+import com.automation.framework.ui.pages.StudentDetailsUi;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -34,8 +36,9 @@ public class StudentUi extends FluentUi implements Student {
     }
 
     @Override
-    public Object details() {
-        return null;
+    public StudentDetails details() {
+        dataRow.findElement(By.xpath(".//a[contains(@href,'/Student/Details')]")).click();
+        return new StudentDetailsUi(getDriver());
     }
 
     @Override
