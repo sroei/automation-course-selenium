@@ -2,6 +2,7 @@
 using Automation.Api.Pages;
 using Automation.Core.Components;
 using Automation.Core.Logging;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,19 @@ namespace Automation.Framework.RestApi.Pages
     public class StudentsRest : FluentRestApi, IStudents
     {
         public StudentsRest(HttpClient httpClient)
-            : base(httpClient) { }
+            : this(httpClient, new TraceLogger()) { }
 
         public StudentsRest(HttpClient httpClient, ILogger logger)
-            : base(httpClient, logger) { }
+            : base(httpClient, logger)
+        {
+            var response = httpClient.GetAsync("https://gravitymvctestapplication.azurewebsites.net/api/Students").GetAwaiter().GetResult();
+            if (!response.IsSuccessStatusCode)
+            {
+                return;
+            }
+            var responseBody = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            var token = JToken.Parse(responseBody);
+        }
 
         public ICreateStudent Create()
         {
