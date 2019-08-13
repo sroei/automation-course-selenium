@@ -1,13 +1,17 @@
 package com.automation.testing.containers;
 
+import com.automation.framework.rest.pages.StudentsRest;
+import com.automation.framework.ui.pages.StudentsUi;
 import com.automation.testing.cases.CreateStudent;
 import com.automation.testing.cases.SearchStudents;
 import com.automation.testing.cases.StudentDetails;
 import com.automation.testing.tools.Utilities;
+import okhttp3.OkHttpClient;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Map;
 
@@ -37,6 +41,11 @@ public class StudentTests {
 
         //  assert actual
         Assert.assertTrue(actual);
+    }
+
+    @Test
+    public void tempTest() throws IOException {
+        StudentsRest studentsUi = new StudentsRest(new OkHttpClient());
     }
 
     @DataProvider(name = "search-data-provider")

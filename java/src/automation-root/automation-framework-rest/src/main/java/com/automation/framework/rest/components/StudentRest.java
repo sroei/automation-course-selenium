@@ -1,6 +1,7 @@
 package com.automation.framework.rest.components;
 
 import com.automation.api.components.Student;
+import com.automation.api.pages.StudentDetails;
 import com.automation.core.components.FluentRest;
 import com.automation.core.logging.Logger;
 import okhttp3.OkHttpClient;
@@ -22,7 +23,7 @@ public class StudentRest extends FluentRest implements Student {
     }
 
     @Override
-    public Object details() {
+    public StudentDetails details() {
         return null;
     }
 

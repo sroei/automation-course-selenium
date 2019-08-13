@@ -5,17 +5,26 @@ import com.automation.api.pages.CreateStudent;
 import com.automation.api.pages.Students;
 import com.automation.core.components.FluentRest;
 import com.automation.core.logging.Logger;
+import com.automation.core.logging.TraceLogger;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 
+import java.io.IOException;
 import java.util.List;
 
 public class StudentsRest extends FluentRest implements Students {
-    public StudentsRest(OkHttpClient httpClient) {
-        super(httpClient);
+    public StudentsRest(OkHttpClient httpClient) throws IOException {
+        this(httpClient, new TraceLogger());
     }
 
-    public StudentsRest(OkHttpClient httpClient, Logger logger) {
+    public StudentsRest(OkHttpClient httpClient, Logger logger) throws IOException {
         super(httpClient, logger);
+
+        Request request = new Request.Builder().url("https://gravitymvctestapplication.azurewebsites.net/api/Students").get().build();
+        String responseBody = httpClient.newCall(request).execute().body().string();
+        JsonArray studentsArray = new JsonParser().parse(responseBody).getAsJsonArray();
     }
 
     @Override
