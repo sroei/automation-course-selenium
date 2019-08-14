@@ -3,6 +3,7 @@ using Automation.Testing.Cases;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
 
 namespace Automation.Testing.Containers
@@ -55,7 +56,8 @@ namespace Automation.Testing.Containers
         [TestMethod]
         public void TempTest()
         {
-            var studentsRest = new StudentsRest(new HttpClient());
+            var studentsRest = new StudentsRest(new HttpClient()).Students();
+            var a = studentsRest.First().FirstName();
         }
     }
 }
