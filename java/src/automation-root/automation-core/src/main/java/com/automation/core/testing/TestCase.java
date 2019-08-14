@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import sun.net.www.http.HttpClient;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.HashMap;
@@ -33,7 +34,7 @@ public abstract class TestCase {
 
     // components
     public abstract boolean automationTest(Map<String, Object> testParams)
-            throws MalformedURLException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException;
+            throws IOException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException;
 
     public TestCase execute() throws MalformedURLException {
         for (int i = 0; i < attempts; i++) {

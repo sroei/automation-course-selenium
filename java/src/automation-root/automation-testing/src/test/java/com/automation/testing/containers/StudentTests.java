@@ -1,5 +1,6 @@
 package com.automation.testing.containers;
 
+import com.automation.api.components.Student;
 import com.automation.framework.rest.pages.StudentsRest;
 import com.automation.framework.ui.pages.StudentsUi;
 import com.automation.testing.cases.CreateStudent;
@@ -13,6 +14,7 @@ import org.testng.annotations.Test;
 
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.List;
 import java.util.Map;
 
 public class StudentTests {
@@ -45,7 +47,8 @@ public class StudentTests {
 
     @Test
     public void tempTest() throws IOException {
-        StudentsRest studentsUi = new StudentsRest(new OkHttpClient());
+        List<Student> students = new StudentsRest(new OkHttpClient()).students();
+        String f = students.get(0).firstName();
     }
 
     @DataProvider(name = "search-data-provider")
