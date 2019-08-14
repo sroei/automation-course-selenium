@@ -12,21 +12,21 @@ using System.Threading.Tasks;
 
 namespace Automation.Framework.RestApi.Components
 {
-    public class StudentRestApi : FluentRestApi, IStudent
+    public class StudentRest : FluentRestApi, IStudent
     {
         private readonly JToken dataRow;
         private string firstName;
         private string lastName;
         private DateTime enrollementDate;
 
-        public StudentRestApi(HttpClient httpClient, JToken dataRow)
+        public StudentRest(HttpClient httpClient, JToken dataRow)
             : this(httpClient, new TraceLogger())
         {
             this.dataRow = dataRow;
             Build(dataRow);
         }
 
-        public StudentRestApi(HttpClient httpClient, ILogger logger)
+        public StudentRest(HttpClient httpClient, ILogger logger)
             : base(httpClient, logger) { }
 
         public object Delete()
