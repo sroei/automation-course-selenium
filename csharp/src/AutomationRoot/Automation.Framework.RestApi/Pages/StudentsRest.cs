@@ -64,7 +64,7 @@ namespace Automation.Framework.RestApi.Pages
                 return new IStudent[0];
             }
             var responseBody = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JToken.Parse(responseBody).Select(i => new StudentRestApi(HttpClient, i));
+            return JToken.Parse(responseBody).Select(i => new StudentRest(HttpClient, i));
         }
     }
 }
