@@ -1,6 +1,8 @@
 package com.automation.testing.containers;
 
 import com.automation.api.components.Student;
+import com.automation.api.pages.Students;
+import com.automation.core.components.FluentRest;
 import com.automation.framework.rest.pages.StudentsRest;
 import com.automation.framework.ui.pages.StudentsUi;
 import com.automation.testing.cases.CreateStudent;
@@ -13,6 +15,7 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Map;
@@ -46,8 +49,8 @@ public class StudentTests {
     }
 
     @Test
-    public void tempTest() throws IOException {
-        List<Student> students = new StudentsRest(new OkHttpClient()).students();
+    public void tempTest() throws IOException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+        List<Student> students = new FluentRest(new OkHttpClient()).<Students>changeContext(StudentsRest.class, "https://gravitymvctestapplication.azurewebsites.net").students();
         String f = students.get(0).firstName();
     }
 

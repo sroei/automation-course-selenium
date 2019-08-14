@@ -28,6 +28,10 @@ public class StudentsRest extends FluentRest implements Students {
         super(httpClient, logger);
     }
 
+    private StudentsRest(OkHttpClient httpClient, Logger logger, String baseUrl){
+        super(httpClient, logger, baseUrl);
+    }
+
     @Override
     public Students findByName(String name) {
         return null;
@@ -39,7 +43,7 @@ public class StudentsRest extends FluentRest implements Students {
         ArrayList<Student> students = new ArrayList<>();
 
         // get all data-rows
-        Request request = new Request.Builder().url("https://gravitymvctestapplication.azurewebsites.net/api/Students").get().build();
+        Request request = new Request.Builder().url(getBaseUrl() + "/api/Students").get().build();
         String responseBody = Objects.requireNonNull(getHttpClient().newCall(request).execute().body()).string();
         JsonArray dataRows = new JsonParser().parse(responseBody).getAsJsonArray();
 

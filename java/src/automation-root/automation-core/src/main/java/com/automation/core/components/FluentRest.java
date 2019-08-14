@@ -22,6 +22,12 @@ public class FluentRest extends FluentBase {
         this.httpClient = httpClient;
     }
 
+    protected FluentRest(OkHttpClient httpClient, Logger logger, String baseUrl) {
+        super(logger);
+        this.httpClient = httpClient;
+        this.baseUrl = baseUrl;
+    }
+
     public OkHttpClient getHttpClient() {
         return httpClient;
     }
@@ -68,12 +74,11 @@ public class FluentRest extends FluentBase {
     <T> T generateObject(Class c, Logger logger)
             throws NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         // get constructor
-        Constructor<T> ctr = logger == null
-                ? c.getDeclaredConstructor(OkHttpClient.class)
-                : c.getDeclaredConstructor(OkHttpClient.class, Logger.class);
+        Constructor<T> ctr = c.getDeclaredConstructor(OkHttpClient.class, Logger.class, String.class);
+        ctr.setAccessible(true);
 
         // get arguments
-        Object[] args = logger == null ? new Object[]{httpClient} : new Object[]{httpClient, logger};
+        Object[] args = new Object[]{httpClient, logger, baseUrl};
 
         // return new object instance
         return ctr.newInstance(args);
