@@ -2,6 +2,7 @@
 using Automation.Api.Pages;
 using Automation.Core.Components;
 using Automation.Core.Logging;
+using Automation.Framework.RestApi.Components;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -18,16 +19,7 @@ namespace Automation.Framework.RestApi.Pages
             : this(httpClient, new TraceLogger()) { }
 
         public StudentsRest(HttpClient httpClient, ILogger logger)
-            : base(httpClient, logger)
-        {
-            var response = httpClient.GetAsync("https://gravitymvctestapplication.azurewebsites.net/api/Students").GetAwaiter().GetResult();
-            if (!response.IsSuccessStatusCode)
-            {
-                return;
-            }
-            var responseBody = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            var token = JToken.Parse(responseBody);
-        }
+            : base(httpClient, logger) { }
 
         public ICreateStudent Create()
         {
@@ -66,7 +58,13 @@ namespace Automation.Framework.RestApi.Pages
 
         public IEnumerable<IStudent> Students()
         {
-            throw new NotImplementedException();
+            var response = HttpClient.GetAsync("https://gravitymvctestapplication.azurewebsites.net/api/Students").GetAwaiter().GetResult();
+            if (!response.IsSuccessStatusCode)
+            {
+                return new IStudent[0];
+            }
+            var responseBody = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
+            return JToken.Parse(responseBody).Select(i => new StudentRestApi(HttpClient, i));
         }
     }
 }
