@@ -58,7 +58,7 @@ namespace Automation.Framework.RestApi.Pages
 
         public IEnumerable<IStudent> Students()
         {
-            var response = HttpClient.GetAsync("https://gravitymvctestapplication.azurewebsites.net/api/Students").GetAwaiter().GetResult();
+            var response = HttpClient.GetAsync("/api/Students").GetAwaiter().GetResult();
             if (!response.IsSuccessStatusCode)
             {
                 return new IStudent[0];
