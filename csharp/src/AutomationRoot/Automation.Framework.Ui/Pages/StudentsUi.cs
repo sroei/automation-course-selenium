@@ -1,6 +1,7 @@
 ﻿using Automation.Api.Components;
 using Automation.Api.Pages;
 using Automation.Core.Components;
+using Automation.Core.Logging;
 using Automation.Extensions.Components;
 using Automation.Framework.Ui.Components;
 using OpenQA.Selenium;
@@ -15,7 +16,7 @@ namespace Automation.Framework.Ui.Pages
         public StudentsUi(IWebDriver driver)
             : base(driver) { }
 
-        public StudentsUi(IWebDriver driver, Core.Logging.ILogger logger)
+        public StudentsUi(IWebDriver driver, ILogger logger)
             : base(driver, logger) { }
 
         public ICreateStudent Create()
