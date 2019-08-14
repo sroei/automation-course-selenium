@@ -6,6 +6,7 @@ import com.automation.core.components.FluentUi;
 import com.automation.core.testing.TestCase;
 import com.automation.framework.ui.pages.StudentsUi;
 
+import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.util.Map;
@@ -13,7 +14,7 @@ import java.util.Map;
 public class StudentDetails extends TestCase {
     @Override
     public boolean automationTest(Map<String, Object> testParams)
-            throws MalformedURLException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
+            throws IOException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException {
 
         // create driver for this test case
         String application = testParams.get("application").toString();
