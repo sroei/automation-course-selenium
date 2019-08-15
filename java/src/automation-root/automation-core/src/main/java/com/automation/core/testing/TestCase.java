@@ -57,8 +57,7 @@ public abstract class TestCase {
                 break;
             } catch (Exception ex) {
                 logger.debug(ex, ex.getMessage());
-            }
-            finally {
+            } finally {
                 dispose();
             }
         }
@@ -74,7 +73,7 @@ public abstract class TestCase {
         return driver;
     }
 
-    public OkHttpClient getHttpClient(){
+    public OkHttpClient getHttpClient() {
         return httpClient;
     }
 
