@@ -14,7 +14,7 @@
     <build>
         <plugins>
             <plugin>
-                <version>2.3.2</version>
+                <version>RELEASE</version>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <configuration>
