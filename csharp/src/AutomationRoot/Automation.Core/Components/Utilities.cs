@@ -11,8 +11,10 @@ namespace Automation.Core.Components
     {
         public static Type GetTypeByName(string type)
         {
+            const string ASSEMBLY = "Automation.Testing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+
             var assemblies = new List<Assembly>();
-            foreach (var assembly in Assembly.GetCallingAssembly().GetReferencedAssemblies())
+            foreach (var assembly in Assembly.Load(ASSEMBLY).GetReferencedAssemblies())
             {
                 assemblies.Add(Assembly.Load(assembly));
             }
