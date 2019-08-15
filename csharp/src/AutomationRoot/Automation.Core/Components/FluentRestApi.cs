@@ -34,7 +34,7 @@ namespace Automation.Core.Components
 
         public override T ChangeContext<T>(string type, string application)
         {
-            var t = GetTypeByName(type);
+            var t = Utilities.GetTypeByName(type);
             HttpClient.BaseAddress = new Uri(application);
             return Create<T>(t, null);
         }
