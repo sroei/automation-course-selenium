@@ -114,7 +114,7 @@ namespace Automation.Core.Testing
             {
                 return (IFluent)Activator.CreateInstance(t, new object[] { Driver, logger });
             }
-            throw new NotFoundException($"implemention of {type} was not found");
+            throw new NotFoundException($"implementation of {type} was not found");
         }
 
         // setup
