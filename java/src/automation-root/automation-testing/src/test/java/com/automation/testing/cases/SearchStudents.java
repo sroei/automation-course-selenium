@@ -18,8 +18,8 @@ public class SearchStudents extends TestCase {
         String application = testParams.get("application").toString();
         String keyword = testParams.get("keyword").toString();
 
-        return new FluentUi(getDriver())
-                .<Students>changeContext(StudentsUi.class, application)
+        return createFluentApi("com.automation.core.components.FluentUi")
+                .<Students>changeContext("com.automation.framework.ui.pages.StudentsUi", application)
                 .findByName(keyword)
                 .students()
                 .stream()

@@ -40,6 +40,7 @@ public abstract class FluentBase implements Fluent {
     public abstract <T> T changeContext(Class c, String application)
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 
+    @Override
     public abstract <T> T changeContext(String type, String application)
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 
