@@ -16,4 +16,7 @@ public interface Fluent {
 
     <T> T changeContext(Class c, String application)
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
+
+    <T> T changeContext(String c, String application)
+            throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 }
