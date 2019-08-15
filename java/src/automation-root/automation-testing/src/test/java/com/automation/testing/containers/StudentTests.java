@@ -85,7 +85,9 @@ public class StudentTests {
                 "'driver':'CHROME'," +
                 "'driverBinaries':'D:\\\\automation-env\\\\web-drivers'," +
                 "'application':'https://gravitymvctestapplication.azurewebsites.net/Student'," +
-                "'keyword':'Alexander'" +
+                "'keyword':'Alexander'," +
+                "'fluent':'com.automation.core.components.FluentUi'," +
+                "'students':'com.automation.framework.ui.pages.StudentsUi'" +
                 "}";
 
         // return data-provider

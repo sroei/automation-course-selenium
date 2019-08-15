@@ -1,9 +1,7 @@
 package com.automation.testing.cases;
 
 import com.automation.api.pages.Students;
-import com.automation.core.components.FluentUi;
 import com.automation.core.testing.TestCase;
-import com.automation.framework.ui.pages.StudentsUi;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -17,9 +15,11 @@ public class SearchStudents extends TestCase {
         // create driver for this test case
         String application = testParams.get("application").toString();
         String keyword = testParams.get("keyword").toString();
+        String fluent = testParams.get("fluent").toString();
+        String students = testParams.get("students").toString();
 
-        return createFluentApi("com.automation.core.components.FluentUi")
-                .<Students>changeContext("com.automation.framework.ui.pages.StudentsUi", application)
+        return createFluentApi(fluent)
+                .<Students>changeContext(students, application)
                 .findByName(keyword)
                 .students()
                 .stream()
