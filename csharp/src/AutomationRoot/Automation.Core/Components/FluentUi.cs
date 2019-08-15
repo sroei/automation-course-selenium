@@ -43,7 +43,7 @@ namespace Automation.Core.Components
 
         public override T ChangeContext<T>(string type, string application)
         {
-            var t = GetTypeByName(type);
+            var t = Utilities.GetTypeByName(type);
             Driver.Navigate().GoToUrl(application);
             Driver.Manage().Window.Maximize();
             return Create<T>(t, null);
