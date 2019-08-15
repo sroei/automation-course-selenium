@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Automation.Framework.RestApi.Components
 {
-    public class StudentRest : FluentRestApi, IStudent
+    public class StudentRest : FluentRest, IStudent
     {
         private readonly JToken dataRow;
         private string firstName;
