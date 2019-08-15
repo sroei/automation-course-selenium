@@ -13,13 +13,13 @@
     <dependencies>
         <dependency>
             <groupId>com.automation</groupId>
-            <artifactId>automation-api</artifactId>
+            <artifactId>automation-core</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>com.automation</groupId>
-            <artifactId>automation-core</artifactId>
+            <artifactId>automation-api</artifactId>
             <version>1.0-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
