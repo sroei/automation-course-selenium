@@ -1,5 +1,7 @@
 package com.automation.core.testing;
 
+import com.automation.core.components.Fluent;
+import com.automation.core.components.FluentBase;
 import com.automation.core.logging.Logger;
 import com.automation.core.logging.TraceLogger;
 import com.automation.extensions.components.WebDriverFactory;
@@ -10,8 +12,10 @@ import sun.net.www.http.HttpClient;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -53,8 +57,7 @@ public abstract class TestCase {
                 break;
             } catch (Exception ex) {
                 logger.debug(ex, ex.getMessage());
-            }
-            finally {
+            } finally {
                 dispose();
             }
         }
@@ -70,7 +73,7 @@ public abstract class TestCase {
         return driver;
     }
 
-    public OkHttpClient getHttpClient(){
+    public OkHttpClient getHttpClient() {
         return httpClient;
     }
 
@@ -88,6 +91,30 @@ public abstract class TestCase {
     public TestCase withLogger(Logger logger) {
         this.logger = logger;
         return this;
+    }
+
+    // factory
+    @SuppressWarnings("unchecked")
+    public Fluent createFluentApi(String type)
+            throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+        // extracting class
+        Class t = Class.forName(type);
+
+        // extract constructors
+        Constructor<?>[] ctr = t.getConstructors();
+
+        // setup conditions
+        boolean isFluent = FluentBase.class.isAssignableFrom(t);
+        boolean isRest = isFluent && Arrays.stream(ctr).anyMatch(c -> Arrays.stream(c.getParameterTypes()).anyMatch(p -> p == OkHttpClient.class));
+        boolean isFront = isFluent && Arrays.stream(ctr).anyMatch(c -> Arrays.stream(c.getParameterTypes()).anyMatch(p -> p == WebDriver.class));
+
+        // factoring
+        if (isRest) {
+            return (Fluent) t.getDeclaredConstructor(OkHttpClient.class, Logger.class).newInstance(httpClient, logger);
+        } else if (isFront) {
+            return (Fluent) t.getDeclaredConstructor(WebDriver.class, Logger.class).newInstance(driver, logger);
+        }
+        throw new ClassNotFoundException("implementation of " + type + " was not found");
     }
 
     // setup
