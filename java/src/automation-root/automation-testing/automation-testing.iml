@@ -9,8 +9,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module" module-name="automation-extensions" scope="TEST" />
-    <orderEntry type="module" module-name="automation-core" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.automation:automation-extensions:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="library" name="Maven: com.automation:automation-core:1.0-SNAPSHOT" level="project" />
     <orderEntry type="module" module-name="automation-api" />
     <orderEntry type="module" module-name="automation-framework-ui" />
     <orderEntry type="module" module-name="automation-framework-rest" scope="TEST" />
