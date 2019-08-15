@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Automation.Framework.RestApi.Pages
 {
-    public class StudentsRest : FluentRestApi, IStudents
+    public class StudentsRest : FluentRest, IStudents
     {
         public StudentsRest(HttpClient httpClient)
             : this(httpClient, new TraceLogger()) { }

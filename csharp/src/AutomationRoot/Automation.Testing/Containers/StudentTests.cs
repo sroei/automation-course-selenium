@@ -22,6 +22,15 @@ namespace Automation.Testing.Containers
             "'fluent':'Automation.Core.Components.FluentUi'," +
             "'students':'Automation.Framework.Ui.Pages.StudentsUi'" +
             "}")]
+        [DataRow("" +
+            "{" +
+            "'driver':'HTTP'," +
+            "'keyword':" +
+            "'Alexander'," +
+            "'application':'https://gravitymvctestapplication.azurewebsites.net/Student'," +
+            "'fluent':'Automation.Core.Components.FluentRest'," +
+            "'students':'Automation.Framework.RestApi.Pages.StudentsRest'" +
+            "}")]
         public void SearchStudentUiTest(string testParams)
         {
             // generate  test-parameters
@@ -65,7 +74,7 @@ namespace Automation.Testing.Containers
         [TestMethod]
         public void TempTest()
         {
-            var studentsRest = new FluentRestApi(new HttpClient()).ChangeContext<StudentsRest>("https://gravitymvctestapplication.azurewebsites.net").Students();
+            var studentsRest = new FluentRest(new HttpClient()).ChangeContext<StudentsRest>("https://gravitymvctestapplication.azurewebsites.net").Students();
             var a = studentsRest.First().FirstName();
         }
     }
