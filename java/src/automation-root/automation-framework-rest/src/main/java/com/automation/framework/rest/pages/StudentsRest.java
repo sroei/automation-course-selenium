@@ -21,27 +21,33 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class StudentsRest extends FluentRest implements Students {
-    public StudentsRest(OkHttpClient httpClient) {
+    private List<Student> studentList;
+
+    public StudentsRest(OkHttpClient httpClient) throws IOException {
         this(httpClient, new TraceLogger());
     }
 
-    private StudentsRest(OkHttpClient httpClient, Logger logger) {
-        super(httpClient, logger);
+    private StudentsRest(OkHttpClient httpClient, Logger logger) throws IOException {
+        this(httpClient, logger, "https://localhost");
     }
 
-    private StudentsRest(OkHttpClient httpClient, Logger logger, String baseUrl) {
+    private StudentsRest(OkHttpClient httpClient, Logger logger, String baseUrl) throws IOException {
+        this(httpClient, logger, baseUrl, null);
+    }
+
+    private StudentsRest(OkHttpClient httpClient, Logger logger, String baseUrl, String name) throws IOException {
         super(httpClient, logger, baseUrl);
+        studentList = build(name);
     }
 
     @Override
     public Students findByName(String name) throws IOException {
-        List<Student> students = build(name);
-        return null;
+        return new StudentsRest(getHttpClient(), getLogger(), getBaseUrl(), name);
     }
 
     @Override
-    public List<Student> students() throws IOException {
-        return build(null);
+    public List<Student> students() {
+        return studentList;
     }
 
     @Override
