@@ -7,6 +7,7 @@ import com.automation.core.logging.TraceLogger;
 import com.automation.extensions.components.WebDriverFactory;
 import com.automation.extensions.contracts.DriverParams;
 import okhttp3.OkHttpClient;
+import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
 import sun.net.www.http.HttpClient;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
@@ -127,18 +128,27 @@ public abstract class TestCase {
         DriverParams driverParams = new DriverParams().setDriver("CHROME").setBinaries(".");
 
         // set driver if exists
-        if (testParams != null && testParams.containsKey(DRIVER)) {
-            driverParams.setDriver(testParams.get(DRIVER).toString()).setBinaries(testParams.get(BINARIES).toString());
-        } else {
-            assert testParams != null;
-            testParams.put(DRIVER, "");
+        boolean isDriver = testParams != null && testParams.containsKey(DRIVER);
+        boolean isBinaries = isDriver && testParams.containsKey(BINARIES);
+
+        // factoring
+        if(!isDriver) {
+            throw new NotFoundException("you must provide a valid 'driver'");
         }
-        if (testParams != null && testParams.get(DRIVER).toString().equals("HTTP")) {
+        if(!isBinaries) {
+            driverParams.setDriver(testParams.get(DRIVER).toString());
+        }
+        if(isBinaries){
+            driverParams.setDriver(testParams.get(DRIVER).toString()).setBinaries(testParams.get(BINARIES).toString());
+        }
+
+        // http setup
+        if (testParams.get(DRIVER).toString().equals("HTTP")) {
             httpClient = new OkHttpClient();
             return;
         }
 
-        // generate driver
+        // web-driver setup
         driver = new WebDriverFactory(driverParams).get();
     }
 

@@ -28,7 +28,7 @@ public class StudentsRest extends FluentRest implements Students {
         super(httpClient, logger);
     }
 
-    private StudentsRest(OkHttpClient httpClient, Logger logger, String baseUrl){
+    private StudentsRest(OkHttpClient httpClient, Logger logger, String baseUrl) {
         super(httpClient, logger, baseUrl);
     }
 
