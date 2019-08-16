@@ -70,7 +70,7 @@ public class StudentDetailsRest extends FluentRest implements StudentDetails {
         String route = String.format("/api/Students/%d", studentId);
 
         // get all data-rows
-        Request request = new Request.Builder().url(getBaseUrl() + "/api/Students").get().build();
+        Request request = new Request.Builder().url(getBaseUrl() + route).get().build();
         String responseBody = Objects.requireNonNull(getHttpClient().newCall(request).execute().body()).string();
         JsonObject dataRow = new JsonParser().parse(responseBody).getAsJsonObject();
 

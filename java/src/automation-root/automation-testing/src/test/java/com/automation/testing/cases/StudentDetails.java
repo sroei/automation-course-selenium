@@ -19,9 +19,11 @@ public class StudentDetails extends TestCase {
         // create driver for this test case
         String application = testParams.get("application").toString();
         String keyword = testParams.get("keyword").toString();
+        String fluent = testParams.get("fluent").toString();
+        String students = testParams.get("students").toString();
 
-        Student student = new  FluentUi(getDriver())
-                .<Students>changeContext(StudentsUi.class, application)
+        Student student = createFluentApi(fluent)
+                .<Students>changeContext(students, application)
                 .findByName(keyword)
                 .students()
                 .stream()
