@@ -92,7 +92,7 @@ public class StudentsRest extends FluentRest implements Students {
 
         // iterate & build students
         for (int i = 0; i < dataRows.size(); i++) {
-            Student student = new StudentRest(getHttpClient(), dataRows.get(i));
+            Student student = new StudentRest(getHttpClient(), getLogger(), getBaseUrl(), dataRows.get(i));
             students.add(student);
         }
 
