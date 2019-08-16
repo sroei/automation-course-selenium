@@ -82,14 +82,14 @@ public class StudentTests {
     private Object[][] searchProvider(){
         // data to pass as test parameters
         String json = "[" +
-//                "{" +
-//                "'driver':'CHROME'," +
-//                "'driverBinaries':'D:\\\\automation-env\\\\web-drivers'," +
-//                "'application':'https://gravitymvctestapplication.azurewebsites.net/Student'," +
-//                "'keyword':'Alexander'," +
-//                "'fluent':'com.automation.core.components.FluentUi'," +
-//                "'students':'com.automation.framework.ui.pages.StudentsUi'" +
-//                "}," +
+                "{" +
+                "'driver':'CHROME'," +
+                "'driverBinaries':'D:\\\\automation-env\\\\web-drivers'," +
+                "'application':'https://gravitymvctestapplication.azurewebsites.net/Student'," +
+                "'keyword':'Alexander'," +
+                "'fluent':'com.automation.core.components.FluentUi'," +
+                "'students':'com.automation.framework.ui.pages.StudentsUi'" +
+                "}," +
                 "{" +
                 "'driver':'HTTP'," +
                 "'application':'https://gravitymvctestapplication.azurewebsites.net'," +
