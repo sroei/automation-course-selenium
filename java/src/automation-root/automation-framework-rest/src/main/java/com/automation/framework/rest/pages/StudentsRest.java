@@ -18,6 +18,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class StudentsRest extends FluentRest implements Students {
     public StudentsRest(OkHttpClient httpClient) {
@@ -33,26 +34,14 @@ public class StudentsRest extends FluentRest implements Students {
     }
 
     @Override
-    public Students findByName(String name) {
+    public Students findByName(String name) throws IOException {
+        List<Student> students = build(name);
         return null;
     }
 
     @Override
     public List<Student> students() throws IOException {
-        // initialize result
-        ArrayList<Student> students = new ArrayList<>();
-
-        // get all data-rows
-        Request request = new Request.Builder().url(getBaseUrl() + "/api/Students").get().build();
-        String responseBody = Objects.requireNonNull(getHttpClient().newCall(request).execute().body()).string();
-        JsonArray dataRows = new JsonParser().parse(responseBody).getAsJsonArray();
-
-        // iterate & build students
-        for (int i = 0; i < dataRows.size(); i++) {
-            Student student = new StudentRest(getHttpClient(), dataRows.get(i));
-            students.add(student);
-        }
-        return students;
+        return build(null);
     }
 
     @Override
@@ -83,5 +72,30 @@ public class StudentsRest extends FluentRest implements Students {
     @Override
     public int page() {
         return 0;
+    }
+
+    // build pipeline
+    private List<Student> build(String name) throws IOException {
+        // initialize result
+        ArrayList<Student> students = new ArrayList<>();
+
+        // get all data-rows
+        Request request = new Request.Builder().url(getBaseUrl() + "/api/Students").get().build();
+        String responseBody = Objects.requireNonNull(getHttpClient().newCall(request).execute().body()).string();
+        JsonArray dataRows = new JsonParser().parse(responseBody).getAsJsonArray();
+
+        // iterate & build students
+        for (int i = 0; i < dataRows.size(); i++) {
+            Student student = new StudentRest(getHttpClient(), dataRows.get(i));
+            students.add(student);
+        }
+
+        if (name == null || name.equals("")) {
+            return students;
+        }
+        return students
+                .stream()
+                .filter(i -> i.firstName().contains(name) || i.lastName().contains(name))
+                .collect(Collectors.toList());
     }
 }

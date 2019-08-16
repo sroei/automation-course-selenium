@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.List;
 
 public interface Students extends Fluent, PageNavigator<Students>, Menu, Create<CreateStudent> {
-    Students findByName(String name);
+    Students findByName(String name) throws IOException;
 
     List<Student> students() throws IOException;
 }
