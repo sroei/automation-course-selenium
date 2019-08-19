@@ -22,7 +22,7 @@ public class FluentRest extends FluentBase {
         this.httpClient = httpClient;
     }
 
-    protected FluentRest(OkHttpClient httpClient, Logger logger, String baseUrl) {
+    public FluentRest(OkHttpClient httpClient, Logger logger, String baseUrl) {
         super(logger);
         this.httpClient = httpClient;
         this.baseUrl = baseUrl;
