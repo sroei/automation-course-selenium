@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -11,12 +12,13 @@ namespace Automation.Core.Components
     {
         public static Type GetTypeByName(string type)
         {
-            const string ASSEMBLY = "Automation.Testing, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null";
+            // get all assemblies path
+            var assemblyFiles = Directory.GetFiles(Environment.CurrentDirectory, "*.dll", SearchOption.AllDirectories);
 
             var assemblies = new List<Assembly>();
-            foreach (var assembly in Assembly.Load(ASSEMBLY).GetReferencedAssemblies())
+            foreach (var file in assemblyFiles)
             {
-                assemblies.Add(Assembly.Load(assembly));
+                assemblies.Add(Assembly.Load(AssemblyName.GetAssemblyName(file)));
             }
             return assemblies
                 .SelectMany(i => i.GetTypes())
