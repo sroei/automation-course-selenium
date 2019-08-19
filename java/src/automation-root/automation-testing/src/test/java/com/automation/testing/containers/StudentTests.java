@@ -52,13 +52,25 @@ public class StudentTests {
     @DataProvider(name = "create-data-provider")
     public Object[][] createStudentProvider() {
         // data to pass as test parameters
-        String json = "{" +
+        String json = "[" +
+                "{" +
                 "'driver':'CHROME'," +
                 "'driverBinaries':'D:\\\\automation-env\\\\web-drivers'," +
                 "'application':'https://gravitymvctestapplication.azurewebsites.net/Student'," +
-                "'firstName':'java'," +
-                "'lastName':'student'" +
-                "}";
+                "'firstName':'java ui'," +
+                "'lastName':'student'," +
+                "'fluent':'com.automation.core.components.FluentUi'," +
+                "'students':'com.automation.framework.ui.pages.StudentsUi'" +
+                "}," +
+                "{" +
+                "'driver':'HTTP'," +
+                "'application':'https://gravitymvctestapplication.azurewebsites.net'," +
+                "'firstName':'java api'," +
+                "'lastName':'student'," +
+                "'fluent':'com.automation.core.components.FluentRest'," +
+                "'students':'com.automation.framework.rest.pages.StudentsRest'" +
+                "}" +
+                "]";
 
         // return data-provider
         return Utilities.dataProviderFactory(json);
