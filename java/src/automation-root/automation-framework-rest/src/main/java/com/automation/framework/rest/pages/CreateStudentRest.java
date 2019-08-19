@@ -5,7 +5,11 @@ import com.automation.api.pages.Students;
 import com.automation.core.components.FluentRest;
 import com.automation.core.logging.Logger;
 import com.automation.core.logging.TraceLogger;
+import com.google.gson.Gson;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -56,8 +60,16 @@ public class CreateStudentRest extends FluentRest implements CreateStudent {
     }
 
     @Override
-    public Students create() {
-        return null;
+    public Students create() throws IOException {
+        // request body
+        RequestBody requestBody = RequestBody.create(MediaType.parse("application/json"), new Gson().toJson(student));
+        Request request = new Request.Builder().post(requestBody).url(getBaseUrl() + "/api/Students").build();
+
+        // execute request
+        getHttpClient().newCall(request).execute();
+
+        // return new students call
+        return new StudentsRest(getHttpClient(), getLogger(), getBaseUrl());
     }
 
     @Override
