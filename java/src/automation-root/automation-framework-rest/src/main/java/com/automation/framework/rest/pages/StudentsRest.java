@@ -31,7 +31,7 @@ public class StudentsRest extends FluentRest implements Students {
         this(httpClient, logger, "https://localhost");
     }
 
-    private StudentsRest(OkHttpClient httpClient, Logger logger, String baseUrl) throws IOException {
+    public StudentsRest(OkHttpClient httpClient, Logger logger, String baseUrl) throws IOException {
         this(httpClient, logger, baseUrl, null);
     }
 
