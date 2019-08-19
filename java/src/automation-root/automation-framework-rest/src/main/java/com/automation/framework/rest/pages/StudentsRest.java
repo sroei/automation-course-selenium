@@ -52,7 +52,7 @@ public class StudentsRest extends FluentRest implements Students {
 
     @Override
     public CreateStudent create() {
-        return null;
+        return new CreateStudentRest(getHttpClient(), getLogger(), getBaseUrl());
     }
 
     @Override

@@ -19,9 +19,11 @@ public class CreateStudent extends TestCase {
         String application = testParams.get("application").toString();
         String firstName = testParams.get("firstName").toString();
         String lastName = testParams.get("lastName").toString();
+        String fluent = testParams.get("fluent").toString();
+        String students = testParams.get("students").toString();
 
-        return new FluentUi(getDriver())
-                .<Students>changeContext(StudentsUi.class, application)
+        return createFluentApi(fluent)
+                .<Students>changeContext(students, application)
                 .create()
                 .firstName(firstName)
                 .lastName(lastName)
