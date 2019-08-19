@@ -7,6 +7,7 @@ import com.automation.core.logging.Logger;
 import com.automation.core.logging.TraceLogger;
 import okhttp3.OkHttpClient;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -20,7 +21,7 @@ public class CreateStudentRest extends FluentRest implements CreateStudent {
     }
 
     public CreateStudentRest(OkHttpClient httpClient, Logger logger) {
-        this (httpClient, logger, "http://localhost");
+        this(httpClient, logger, "http://localhost");
     }
 
     public CreateStudentRest(OkHttpClient httpClient, Logger logger, String baseUrl) {
@@ -50,8 +51,8 @@ public class CreateStudentRest extends FluentRest implements CreateStudent {
     }
 
     @Override
-    public Students backToList() {
-        return null;
+    public Students backToList() throws IOException {
+        return new StudentsRest(getHttpClient(), getLogger(), getBaseUrl());
     }
 
     @Override
@@ -61,16 +62,21 @@ public class CreateStudentRest extends FluentRest implements CreateStudent {
 
     @Override
     public String firstName() {
-        return null;
+        final String KEY = "firstMidName";
+        return student.containsKey(KEY) ? student.get(KEY).toString() : "";
     }
 
     @Override
     public String lastName() {
-        return null;
+        final String KEY = "lastName";
+        return student.containsKey(KEY) ? student.get(KEY).toString() : "";
     }
 
     @Override
     public LocalDateTime enrollmentDate() {
-        return null;
+        final String KEY = "enrollmentDate";
+        return student.containsKey(KEY)
+                ? LocalDateTime.parse(student.get(KEY).toString())
+                : LocalDateTime.parse("1980-01-01 00:00:00");
     }
 }

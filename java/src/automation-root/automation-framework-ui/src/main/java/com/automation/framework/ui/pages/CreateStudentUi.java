@@ -34,7 +34,7 @@ public class CreateStudentUi extends FluentUi implements CreateStudent {
 
     @Override
     public String firstName() {
-        return null;
+        return getDriverExtensions().getEnabledElement(By.xpath("//input[@id='FirstMidName']")).getAttribute("value");
     }
 
     @Override
