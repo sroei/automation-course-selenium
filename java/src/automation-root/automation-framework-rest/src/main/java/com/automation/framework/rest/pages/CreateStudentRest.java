@@ -8,8 +8,13 @@ import com.automation.core.logging.TraceLogger;
 import okhttp3.OkHttpClient;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.Map;
 
 public class CreateStudentRest extends FluentRest implements CreateStudent {
+    private Map<String, Object> student;
+
     public CreateStudentRest(OkHttpClient httpClient) {
         this(httpClient, new TraceLogger());
     }
@@ -20,21 +25,28 @@ public class CreateStudentRest extends FluentRest implements CreateStudent {
 
     public CreateStudentRest(OkHttpClient httpClient, Logger logger, String baseUrl) {
         super(httpClient, logger, baseUrl);
+        student = new HashMap<>();
     }
 
     @Override
     public CreateStudent firstName(String fName) {
-        return null;
+        student.put("firstMidName", fName);
+        return this;
     }
 
     @Override
     public CreateStudent lastName(String lName) {
-        return null;
+        student.put("lastName", lName);
+        return this;
     }
 
     @Override
     public CreateStudent enrollmentDate(LocalDateTime eDate) {
-        return null;
+        // parse date
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String localDate = eDate.toLocalDate().format(formatter);
+        student.put("enrollmentDate", localDate);
+        return this;
     }
 
     @Override
