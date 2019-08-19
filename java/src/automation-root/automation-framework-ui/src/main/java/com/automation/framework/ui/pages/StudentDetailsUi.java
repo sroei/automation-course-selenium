@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.time.LocalDateTime;
 
+@SuppressWarnings("unused")
 public class StudentDetailsUi extends FluentUi implements StudentDetails {
     public StudentDetailsUi(WebDriver driver) {
         super(driver);

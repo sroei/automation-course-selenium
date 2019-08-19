@@ -2,16 +2,14 @@ package com.automation.extensions.components;
 
 import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
 
-import java.security.Key;
 import java.time.Duration;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@SuppressWarnings({"unused", "WeakerAccess", "UnusedReturnValue"})
 public class WebDriverExtensions {
     private WebDriver driver;
     private FluentWait<WebDriver> wait;

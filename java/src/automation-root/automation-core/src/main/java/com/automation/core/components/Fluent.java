@@ -4,6 +4,7 @@ import com.automation.core.logging.Logger;
 
 import java.lang.reflect.InvocationTargetException;
 
+@SuppressWarnings("unused")
 public interface Fluent {
     <T> T changeContext(Class c, Logger logger)
             throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;

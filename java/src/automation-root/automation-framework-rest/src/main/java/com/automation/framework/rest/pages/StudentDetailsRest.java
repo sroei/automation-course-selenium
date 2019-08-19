@@ -1,13 +1,10 @@
 package com.automation.framework.rest.pages;
 
 import com.automation.api.components.Enrollment;
-import com.automation.api.components.Student;
 import com.automation.api.pages.StudentDetails;
 import com.automation.core.components.FluentRest;
 import com.automation.core.logging.Logger;
 import com.automation.core.logging.TraceLogger;
-import com.automation.framework.rest.components.StudentRest;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import okhttp3.OkHttpClient;
@@ -15,11 +12,9 @@ import okhttp3.Request;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
+@SuppressWarnings("unused")
 public class StudentDetailsRest extends FluentRest implements StudentDetails {
     private int studentId;
     private String fName;

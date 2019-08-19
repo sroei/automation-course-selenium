@@ -11,8 +11,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -20,6 +18,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class StudentsRest extends FluentRest implements Students {
     private List<Student> studentList;
 

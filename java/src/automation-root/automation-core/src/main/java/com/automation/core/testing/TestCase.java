@@ -9,7 +9,6 @@ import com.automation.extensions.contracts.DriverParams;
 import okhttp3.OkHttpClient;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
-import sun.net.www.http.HttpClient;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
@@ -20,6 +19,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings({"unused", "unchecked", "WeakerAccess"})
 public abstract class TestCase {
 
     // fields
@@ -95,7 +95,6 @@ public abstract class TestCase {
     }
 
     // factory
-    @SuppressWarnings("unchecked")
     public Fluent createFluentApi(String type)
             throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         // extracting class

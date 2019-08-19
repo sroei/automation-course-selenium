@@ -2,13 +2,12 @@ package com.automation.core.components;
 
 import com.automation.core.logging.Logger;
 import com.automation.core.logging.TraceLogger;
-import com.automation.extensions.components.WebDriverExtensions;
 import okhttp3.OkHttpClient;
-import org.openqa.selenium.WebDriver;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+@SuppressWarnings({"WeakerAccess", "unused"})
 public class FluentRest extends FluentBase {
     private final OkHttpClient httpClient;
     private String baseUrl;
@@ -38,7 +37,7 @@ public class FluentRest extends FluentBase {
 
     @Override
     public <T> T changeContext(Class c, String application, Logger logger)
-            throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+            throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // set base url
         baseUrl = application;
 
@@ -48,7 +47,7 @@ public class FluentRest extends FluentBase {
 
     @Override
     public <T> T changeContext(Class c, String application)
-            throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+            throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // set base url
         baseUrl = application;
 
