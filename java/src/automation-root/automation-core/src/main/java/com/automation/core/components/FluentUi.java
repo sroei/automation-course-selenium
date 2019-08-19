@@ -11,6 +11,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class FluentUi extends FluentBase {
 
     private final WebDriver driver;
@@ -48,7 +49,7 @@ public class FluentUi extends FluentBase {
 
     @Override
     public <T> T changeContext(Class c, String application)
-            throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+            throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // navigate
         driver.navigate().to(application);
         driver.manage().window().maximize();
@@ -73,7 +74,7 @@ public class FluentUi extends FluentBase {
 
     @Override
     public <T> T changeContext(Class c, String application, Logger logger)
-            throws ClassNotFoundException, InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+            throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
         // navigation
         driver.navigate().to(application);
         driver.manage().window().maximize();

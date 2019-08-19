@@ -13,6 +13,7 @@ import org.openqa.selenium.WebElement;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings({"unused", "WeakerAccess", "SpellCheckingInspection"})
 public class StudentsUi extends FluentUi implements Students {
     public StudentsUi(WebDriver driver) {
         super(driver);
@@ -40,8 +41,8 @@ public class StudentsUi extends FluentUi implements Students {
         List<WebElement> dataRows = getDriverExtensions().getElements(By.xpath("//tbody/tr"));
 
         // iterate & build students
-        for (int i = 0; i < dataRows.size(); i++) {
-            Student student = new StudentUi(getDriver(), dataRows.get(i));
+        for (WebElement dataRow : dataRows) {
+            Student student = new StudentUi(getDriver(), dataRow);
             students.add(student);
         }
         return students;

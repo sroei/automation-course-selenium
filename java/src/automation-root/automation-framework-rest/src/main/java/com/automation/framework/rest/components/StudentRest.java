@@ -10,13 +10,11 @@ import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import okhttp3.OkHttpClient;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
+@SuppressWarnings("unused")
 public class StudentRest extends FluentRest implements Student {
     private String fName;
     private String lName;

@@ -17,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class CreateStudentRest extends FluentRest implements CreateStudent {
     private Map<String, Object> student;
 

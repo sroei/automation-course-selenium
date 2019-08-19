@@ -8,10 +8,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+@SuppressWarnings({"unused", "WeakerAccess"})
 public class CreateStudentUi extends FluentUi implements CreateStudent {
     public CreateStudentUi(WebDriver driver) {
         super(driver);

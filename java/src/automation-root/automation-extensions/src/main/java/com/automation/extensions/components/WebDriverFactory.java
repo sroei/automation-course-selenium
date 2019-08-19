@@ -21,6 +21,7 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class WebDriverFactory {
     private DriverParams driverParams;
 

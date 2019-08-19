@@ -2,13 +2,10 @@ package com.automation.testing.cases;
 
 import com.automation.api.components.Student;
 import com.automation.api.pages.Students;
-import com.automation.core.components.FluentUi;
 import com.automation.core.testing.TestCase;
-import com.automation.framework.ui.pages.StudentsUi;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.net.MalformedURLException;
 import java.util.Map;
 
 public class StudentDetails extends TestCase {

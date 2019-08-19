@@ -1,8 +1,8 @@
 package com.automation.api.components;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 
+@SuppressWarnings("unused")
 public interface PersonalDetails {
     String firstName();
 
