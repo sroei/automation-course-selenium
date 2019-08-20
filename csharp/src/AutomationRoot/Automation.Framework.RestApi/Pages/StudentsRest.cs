@@ -15,6 +15,9 @@ namespace Automation.Framework.RestApi.Pages
 {
     public class StudentsRest : FluentRest, IStudents
     {
+        // members
+        private readonly IEnumerable<IStudent> students;
+
         public StudentsRest(HttpClient httpClient)
             : this(httpClient, new TraceLogger()) { }
 
@@ -58,13 +61,25 @@ namespace Automation.Framework.RestApi.Pages
 
         public IEnumerable<IStudent> Students()
         {
+            return students;
+        }
+
+        // build pipeline
+        private IEnumerable<IStudent> Build(string name)
+        {
             var response = HttpClient.GetAsync("/api/Students").GetAwaiter().GetResult();
             if (!response.IsSuccessStatusCode)
             {
                 return new IStudent[0];
             }
             var responseBody = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            return JToken.Parse(responseBody).Select(i => new StudentRest(HttpClient, i));
+            var s = JToken.Parse(responseBody).Select(i => new StudentRest(HttpClient, i));
+
+            // filter results
+            const StringComparison COMPARE = StringComparison.OrdinalIgnoreCase;
+            return string.IsNullOrEmpty(name)
+                ? s
+                : s.Where(i => i.FirstName().Equals(name, COMPARE) || i.LastName().Equals(name, COMPARE));
         }
     }
 }
