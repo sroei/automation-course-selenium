@@ -12,7 +12,7 @@ namespace Automation.Framework.RestApi.Pages
 {
     public class StudentDetailsRest : FluentRest, IStudentDetails
     {
-        public StudentDetailsRest(HttpClient httpClient) 
+        public StudentDetailsRest(HttpClient httpClient)
             : base(httpClient) { }
 
         public StudentDetailsRest(HttpClient httpClient, Core.Logging.ILogger logger)
