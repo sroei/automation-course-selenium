@@ -2,6 +2,7 @@
 using Automation.Api.Pages;
 using Automation.Core.Components;
 using Automation.Core.Logging;
+using Automation.Framework.RestApi.Pages;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ namespace Automation.Framework.RestApi.Components
     public class StudentRest : FluentRest, IStudent
     {
         private readonly JToken dataRow;
+        private int id;
         private string firstName;
         private string lastName;
         private DateTime enrollementDate;
@@ -36,7 +38,7 @@ namespace Automation.Framework.RestApi.Components
 
         public IStudentDetails Details()
         {
-            throw new NotImplementedException();
+            return new StudentDetailsRest(HttpClient, Logger, id);
         }
 
         public object Edit()
@@ -65,6 +67,7 @@ namespace Automation.Framework.RestApi.Components
             firstName = $"{dataRow["firstMidName"]}";
             lastName = $"{dataRow["lastName"]}";
             enrollementDate = DateTime.Parse($"{dataRow["enrollmentDate"]}");
+            int.TryParse($"{dataRow["id"]}", out id);
         }
     }
 }
