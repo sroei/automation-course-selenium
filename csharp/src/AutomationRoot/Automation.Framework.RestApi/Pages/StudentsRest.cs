@@ -16,13 +16,19 @@ namespace Automation.Framework.RestApi.Pages
     public class StudentsRest : FluentRest, IStudents
     {
         // members
-        private readonly IEnumerable<IStudent> students;
+        private readonly IEnumerable<IStudent> studentList;
 
         public StudentsRest(HttpClient httpClient)
             : this(httpClient, new TraceLogger()) { }
 
         public StudentsRest(HttpClient httpClient, ILogger logger)
-            : base(httpClient, logger) { }
+            : this(httpClient, logger, string.Empty) { }
+
+        private StudentsRest(HttpClient httpClient, ILogger logger, string name)
+            : base(httpClient, logger)
+        {
+            studentList = Build(name);
+        }
 
         public ICreateStudent Create()
         {
@@ -31,7 +37,7 @@ namespace Automation.Framework.RestApi.Pages
 
         public IStudents FindByName(string name)
         {
-            throw new NotImplementedException();
+            return new StudentsRest(HttpClient, Logger, name);
         }
 
         public T Menu<T>(string menuName)
@@ -61,7 +67,7 @@ namespace Automation.Framework.RestApi.Pages
 
         public IEnumerable<IStudent> Students()
         {
-            return students;
+            return studentList;
         }
 
         // build pipeline
@@ -73,13 +79,13 @@ namespace Automation.Framework.RestApi.Pages
                 return new IStudent[0];
             }
             var responseBody = response.Content.ReadAsStringAsync().GetAwaiter().GetResult();
-            var s = JToken.Parse(responseBody).Select(i => new StudentRest(HttpClient, i));
+            var students = JToken.Parse(responseBody).Select(i => new StudentRest(HttpClient, i));
 
             // filter results
             const StringComparison COMPARE = StringComparison.OrdinalIgnoreCase;
             return string.IsNullOrEmpty(name)
-                ? s
-                : s.Where(i => i.FirstName().Equals(name, COMPARE) || i.LastName().Equals(name, COMPARE));
+                ? students
+                : students.Where(i => i.FirstName().Equals(name, COMPARE) || i.LastName().Equals(name, COMPARE));
         }
     }
 }
