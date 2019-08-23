@@ -75,7 +75,24 @@ namespace Automation.Testing.Containers
         }
 
         [DataTestMethod]
-        [DataRow("{'driver':'CHROME','firstName':'csharp','lastName':'student','application':'https://gravitymvctestapplication.azurewebsites.net/Student'}")]
+        //[DataRow("" +
+        //    "{" +
+        //    "'driver':'CHROME'," +
+        //    "'firstName':'csharp'," +
+        //    "'lastName':'student'," +
+        //    "'application':'https://gravitymvctestapplication.azurewebsites.net/Student'," +
+        //    "'fluent':'Automation.Core.Components.FluentUi'," +
+        //    "'students':'Automation.Framework.Ui.Pages.StudentsUi'" +
+        //    "}")]
+        [DataRow("" +
+            "{" +
+            "'driver':'HTTP'," +
+            "'firstName':'csharp'," +
+            "'lastName':'student'," +
+            "'application':'https://gravitymvctestapplication.azurewebsites.net/Student'," +
+            "'fluent':'Automation.Core.Components.FluentRest'," +
+            "'students':'Automation.Framework.RestApi.Pages.StudentsRest'" +
+            "}")]
         public void CreateStudentUiTest(string testParams)
         {
             // generate  test-parameters
