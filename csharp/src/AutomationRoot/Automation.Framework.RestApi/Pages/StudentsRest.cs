@@ -32,7 +32,7 @@ namespace Automation.Framework.RestApi.Pages
 
         public ICreateStudent Create()
         {
-            throw new NotImplementedException();
+            return new CreateStudentRest(HttpClient, Logger);
         }
 
         public IStudents FindByName(string name)
