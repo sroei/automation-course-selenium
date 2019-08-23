@@ -75,19 +75,19 @@ namespace Automation.Testing.Containers
         }
 
         [DataTestMethod]
-        //[DataRow("" +
-        //    "{" +
-        //    "'driver':'CHROME'," +
-        //    "'firstName':'csharp'," +
-        //    "'lastName':'student'," +
-        //    "'application':'https://gravitymvctestapplication.azurewebsites.net/Student'," +
-        //    "'fluent':'Automation.Core.Components.FluentUi'," +
-        //    "'students':'Automation.Framework.Ui.Pages.StudentsUi'" +
-        //    "}")]
+        [DataRow("" +
+            "{" +
+            "'driver':'CHROME'," +
+            "'firstName':'csharp ui'," +
+            "'lastName':'student'," +
+            "'application':'https://gravitymvctestapplication.azurewebsites.net/Student'," +
+            "'fluent':'Automation.Core.Components.FluentUi'," +
+            "'students':'Automation.Framework.Ui.Pages.StudentsUi'" +
+            "}")]
         [DataRow("" +
             "{" +
             "'driver':'HTTP'," +
-            "'firstName':'csharp'," +
+            "'firstName':'csharp api'," +
             "'lastName':'student'," +
             "'application':'https://gravitymvctestapplication.azurewebsites.net/Student'," +
             "'fluent':'Automation.Core.Components.FluentRest'," +
