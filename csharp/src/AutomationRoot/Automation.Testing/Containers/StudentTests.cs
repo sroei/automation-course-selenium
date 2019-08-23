@@ -1,11 +1,7 @@
-﻿using Automation.Core.Components;
-using Automation.Framework.RestApi.Pages;
-using Automation.Testing.Cases;
+﻿using Automation.Testing.Cases;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
 
 namespace Automation.Testing.Containers
 {
