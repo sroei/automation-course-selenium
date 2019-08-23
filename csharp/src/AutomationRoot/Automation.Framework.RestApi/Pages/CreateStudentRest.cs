@@ -13,10 +13,15 @@ namespace Automation.Framework.RestApi.Pages
 {
     public class CreateStudentRest : FluentRest, ICreateStudent
     {
+        // constants
+        private const string F_NAME = "firstMidName";
+        private const string L_NAME = "lastName";
+        private const string E_DATE = "enrollmentDate";
+
         private readonly IDictionary<string, object> requestBody;
 
         public CreateStudentRest(HttpClient httpClient)
-            : base(httpClient) { }
+            : this(httpClient, new TraceLogger()) { }
 
         public CreateStudentRest(HttpClient httpClient, ILogger logger)
             : base(httpClient, logger)
@@ -26,7 +31,7 @@ namespace Automation.Framework.RestApi.Pages
 
         public IStudents BackToList()
         {
-            throw new NotImplementedException();
+            return new StudentsRest(HttpClient, Logger);
         }
 
         public IStudents Create()
@@ -40,35 +45,35 @@ namespace Automation.Framework.RestApi.Pages
 
         public ICreateStudent EnrollementDate(DateTime enrollementDate)
         {
-            requestBody["enrollmentDate"] = enrollementDate.ToString("yyyy-MM-ddThh:mm:ss");
+            requestBody[E_DATE] = enrollementDate.ToString("yyyy-MM-ddThh:mm:ss");
             return this;
         }
 
         public DateTime EnrollementDate()
         {
-            throw new NotImplementedException();
+            return requestBody.ContainsKey(F_NAME) ? DateTime.Parse($"{requestBody[F_NAME]}") : default;
         }
 
         public ICreateStudent FirstName(string firstName)
         {
-            requestBody["firstMidName"] = firstName;
+            requestBody[F_NAME] = firstName;
             return this;
         }
 
         public string FirstName()
         {
-            throw new NotImplementedException();
+            return requestBody.ContainsKey(F_NAME) ? $"{requestBody[F_NAME]}" : string.Empty;
         }
 
         public ICreateStudent LastName(string lastName)
         {
-            requestBody["lastName"] = lastName;
+            requestBody[L_NAME] = lastName;
             return this;
         }
 
         public string LastName()
         {
-            throw new NotImplementedException();
+            return requestBody.ContainsKey(L_NAME) ? $"{requestBody[L_NAME]}" : string.Empty;
         }
     }
 }
