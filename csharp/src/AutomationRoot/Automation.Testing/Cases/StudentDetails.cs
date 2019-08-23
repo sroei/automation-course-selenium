@@ -1,12 +1,8 @@
 ﻿using Automation.Api.Pages;
-using Automation.Core.Components;
 using Automation.Core.Testing;
-using Automation.Framework.Ui.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Automation.Testing.Cases
 {

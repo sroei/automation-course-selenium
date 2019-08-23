@@ -28,6 +28,8 @@ namespace Automation.Testing.Containers
             driver = new InternetExplorerDriver();
             Thread.Sleep(1000);
             driver.Dispose();
+
+            Assert.IsTrue(true);
         }
 
         [TestMethod]
@@ -40,6 +42,8 @@ namespace Automation.Testing.Containers
             driver.FindElement(By.XPath("//a[.='Students']")).Click();
             Thread.Sleep(2000);
             driver.Dispose();
+
+            Assert.IsTrue(true);
         }
 
         [TestMethod]
@@ -54,6 +58,8 @@ namespace Automation.Testing.Containers
             selectElement.SelectByValue("4");
             Thread.Sleep(2000);
             driver.Dispose();
+
+            Assert.IsTrue(true);
         }
 
         [TestMethod]
@@ -66,6 +72,8 @@ namespace Automation.Testing.Containers
             driver.FindElement(By.XPath("//a[.='Students']")).Click();
             Thread.Sleep(2000);
             driver.Dispose();
+
+            Assert.IsTrue(true);
         }
 
         [TestMethod]
@@ -76,6 +84,8 @@ namespace Automation.Testing.Containers
             driver.GoToUrl("https://gravitymvctestapplication.azurewebsites.net/");
             Thread.Sleep(2000);
             driver.Dispose();
+
+            Assert.IsTrue(true);
         }
 
         [TestMethod]
@@ -88,6 +98,8 @@ namespace Automation.Testing.Containers
             driver.GetElement(By.XPath("//a[.='Students']")).Click();
             Thread.Sleep(2000);
             driver.Dispose();
+
+            Assert.IsTrue(true);
         }
 
         [TestMethod]
@@ -100,6 +112,8 @@ namespace Automation.Testing.Containers
             driver.FindElement(By.XPath("//select[@id='SelectedDepartment']")).AsSelect().SelectByValue("4");
             Thread.Sleep(2000);
             driver.Dispose();
+
+            Assert.IsTrue(true);
         }
 
         [TestMethod]
@@ -111,6 +125,8 @@ namespace Automation.Testing.Containers
             var elements = driver.GetElements(By.XPath("//ul/li"));
             Thread.Sleep(2000);
             driver.Dispose();
+
+            Assert.IsTrue(true, $"{elements.Count}");
         }
 
         [TestMethod]
@@ -122,6 +138,8 @@ namespace Automation.Testing.Containers
             driver.GetVisibleElement(By.XPath("//a[.='Students']")).Click();
             Thread.Sleep(2000);
             driver.Dispose();
+
+            Assert.IsTrue(true);
         }
 
         [TestMethod]
@@ -133,6 +151,8 @@ namespace Automation.Testing.Containers
             var elements = driver.GetVisibleElements(By.XPath("//ul/li"));
             Thread.Sleep(2000);
             driver.Dispose();
+
+            Assert.IsTrue(true, $"{elements.Count}");
         }
 
         [TestMethod]
@@ -144,6 +164,8 @@ namespace Automation.Testing.Containers
             driver.GetEnabledElement(By.XPath("//input[@id='SearchString']")).SendKeys("hello");
             Thread.Sleep(2000);
             driver.Dispose();
+
+            Assert.IsTrue(true);
         }
 
         [TestMethod]
@@ -156,6 +178,8 @@ namespace Automation.Testing.Containers
             driver.VerticalWindowScroll(1000);
             Thread.Sleep(2000);
             driver.Dispose();
+
+            Assert.IsTrue(true);
         }
 
         [TestMethod]
@@ -167,6 +191,8 @@ namespace Automation.Testing.Containers
             driver.GetVisibleElement(By.XPath("//a[.='Students']")).Actions().Click().Build().Perform();
             Thread.Sleep(2000);
             driver.Dispose();
+
+            Assert.IsTrue(true);
         }
 
         [TestMethod]
@@ -179,6 +205,8 @@ namespace Automation.Testing.Containers
             driver.GetElement(By.XPath("//a[.='Students']")).ForceClick();
             Thread.Sleep(2000);
             driver.Dispose();
+
+            Assert.IsTrue(true);
         }
 
         [TestMethod]
@@ -190,6 +218,8 @@ namespace Automation.Testing.Containers
             driver.GetEnabledElement(By.XPath("//input[@id='SearchString']")).SendKeys("hello", 1000);
             Thread.Sleep(2000);
             driver.Dispose();
+
+            Assert.IsTrue(true);
         }
 
         [TestMethod]
@@ -204,6 +234,8 @@ namespace Automation.Testing.Containers
             element.ForceClear();
             Thread.Sleep(2000);
             driver.Dispose();
+
+            Assert.IsTrue(true);
         }
 
         [TestMethod]
@@ -216,6 +248,8 @@ namespace Automation.Testing.Containers
             driver.SubmitForm(0);
             Thread.Sleep(2000);
             driver.Dispose();
+
+            Assert.IsTrue(true);
         }
 
         [TestMethod]
@@ -226,6 +260,8 @@ namespace Automation.Testing.Containers
             driver.GoToUrl("https://gravitymvctestapplication.azurewebsites.net/");
             Thread.Sleep(2000);
             driver.Dispose();
+
+            Assert.IsTrue(true);
         }
     }
 }
