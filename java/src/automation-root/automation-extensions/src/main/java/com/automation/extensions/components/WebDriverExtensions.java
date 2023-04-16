@@ -11,9 +11,9 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings({"unused", "WeakerAccess", "UnusedReturnValue"})
 public class WebDriverExtensions {
-    private WebDriver driver;
-    private FluentWait<WebDriver> wait;
-    private Actions actions;
+    private final WebDriver driver;
+    private final FluentWait<WebDriver> wait;
+    private final Actions actions;
 
     public WebDriverExtensions(WebDriver driver) {
         this.driver = driver;
@@ -96,8 +96,8 @@ public class WebDriverExtensions {
     }
 
     public WebElement forceClick(WebElement element) {
-        WebDriver driver = ((WrapsDriver) element).getWrappedDriver();
-        JavascriptExecutor executor = (JavascriptExecutor) driver;
+        WebDriver onDriver = ((WrapsDriver) element).getWrappedDriver();
+        JavascriptExecutor executor = (JavascriptExecutor) onDriver;
         executor.executeScript("arguments[0].click();", element);
         return element;
     }

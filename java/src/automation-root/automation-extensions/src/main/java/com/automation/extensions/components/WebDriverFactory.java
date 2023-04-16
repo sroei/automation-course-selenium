@@ -21,9 +21,8 @@ import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-@SuppressWarnings("SpellCheckingInspection")
 public class WebDriverFactory {
-    private DriverParams driverParams;
+    private final DriverParams driverParams;
 
     public WebDriverFactory(String driverParamsJson){
         this(loadParams(driverParamsJson));
@@ -39,7 +38,7 @@ public class WebDriverFactory {
      * @throws MalformedURLException from inner factory
      */
     public WebDriver get() throws MalformedURLException {
-        if(driverParams.getSource()==null || !driverParams.getSource().toUpperCase().equals("REMOTE")) {
+        if(driverParams.getSource()==null || !driverParams.getSource().equalsIgnoreCase("REMOTE")) {
             return getDriver();
         }
         return getRemoteDriver();

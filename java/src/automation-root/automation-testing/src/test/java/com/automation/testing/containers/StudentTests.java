@@ -15,7 +15,7 @@ public class StudentTests {
     @Test(dataProvider = "search-data-provider")
     public void searchStudentTest(Map<String, Object> testParams) throws MalformedURLException {
         // execute & get actual result
-        boolean actual = new SearchStudents().withTestParams(testParams).execute().getActual();
+        boolean actual = new SearchStudents().setTestParams(testParams).invoke().getActual();
 
         //  assert actual
         Assert.assertTrue(actual);
@@ -24,7 +24,7 @@ public class StudentTests {
     @Test(dataProvider = "details-data-provider")
     public void studentDetailsTest(Map<String, Object> testParams) throws MalformedURLException {
         // execute & get actual result
-        boolean actual = new StudentDetails().withTestParams(testParams).execute().getActual();
+        boolean actual = new StudentDetails().setTestParams(testParams).invoke().getActual();
 
         //  assert actual
         Assert.assertTrue(actual);
@@ -33,7 +33,7 @@ public class StudentTests {
     @Test(dataProvider = "create-data-provider")
     public void createStudentTest(Map<String, Object> testParams) throws MalformedURLException {
         // execute & get actual result
-        boolean actual = new CreateStudent().withTestParams(testParams).execute().getActual();
+        boolean actual = new CreateStudent().setTestParams(testParams).invoke().getActual();
 
         //  assert actual
         Assert.assertTrue(actual);

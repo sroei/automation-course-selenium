@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class StudentsRest extends FluentRest implements Students {
-    private List<Student> studentList;
+    private final List<Student> studentList;
 
     public StudentsRest(OkHttpClient httpClient) throws IOException {
         this(httpClient, new TraceLogger());

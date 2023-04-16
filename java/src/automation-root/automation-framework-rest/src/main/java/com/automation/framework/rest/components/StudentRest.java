@@ -20,7 +20,7 @@ public class StudentRest extends FluentRest implements Student {
     private String lName;
     private LocalDateTime eDate;
     private int studentId;
-    private Gson gson;
+    private final Gson gson;
 
     public StudentRest(OkHttpClient httpClient, JsonElement dataRow) {
         this(httpClient, new TraceLogger(), dataRow);

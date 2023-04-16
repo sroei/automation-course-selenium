@@ -19,7 +19,7 @@ import java.util.Map;
 
 @SuppressWarnings({"unused", "WeakerAccess"})
 public class CreateStudentRest extends FluentRest implements CreateStudent {
-    private Map<String, Object> student;
+    private final Map<String, Object> student;
 
     public CreateStudentRest(OkHttpClient httpClient) {
         this(httpClient, new TraceLogger());

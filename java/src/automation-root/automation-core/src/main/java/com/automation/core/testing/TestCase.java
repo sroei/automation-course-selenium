@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-@SuppressWarnings({"unused", "unchecked", "WeakerAccess"})
+@SuppressWarnings({"unused", "WeakerAccess"})
 public abstract class TestCase {
 
     // fields
@@ -38,67 +38,76 @@ public abstract class TestCase {
     }
 
     // components
-    public abstract boolean automationTest(Map<String, Object> testParams)
-            throws IOException, ClassNotFoundException, NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException;
+    public abstract boolean automationTest(Map<String, Object> testParams) throws
+            IOException,
+            ClassNotFoundException,
+            NoSuchMethodException,
+            InstantiationException,
+            IllegalAccessException,
+            InvocationTargetException;
 
-    public TestCase execute() throws MalformedURLException {
+    public final TestCase invoke() throws MalformedURLException {
         for (int i = 0; i < attempts; i++) {
             setup();
             try {
                 actual = automationTest(testParams);
                 if (actual) {
-                    break;
+                    return this;
                 }
                 logger.debug(String.format("[%s] failed on attempt [%d]", getClass().getName(), i));
-            } catch (NotImplementedException ex) {
-                logger.debug(ex, ex.getMessage());
-                break;
-            } catch (NullPointerException ex) {
-                logger.debug(ex, ex.toString());
-                break;
-            } catch (Exception ex) {
-                logger.debug(ex, ex.getMessage());
+            } catch (NotImplementedException e) {
+                logger.debug(e, e.getMessage());
+                return this;
+            } catch (NullPointerException e) {
+                logger.debug(e, e.toString());
+                return this;
+            } catch (Exception e) {
+                logger.debug(e, e.getMessage());
             } finally {
-                dispose();
+                cleanup();
             }
         }
         return this;
     }
 
     // properties - get actual
-    public boolean getActual() {
+    public final boolean getActual() {
         return actual;
     }
 
-    public WebDriver getDriver() {
+    public final WebDriver getDriver() {
         return driver;
     }
 
-    public OkHttpClient getHttpClient() {
+    public final OkHttpClient getHttpClient() {
         return httpClient;
     }
 
     // configurations
-    public TestCase withTestParams(Map<String, Object> testParams) {
+    public final TestCase setTestParams(Map<String, Object> testParams) {
         this.testParams = testParams;
         return this;
     }
 
-    public TestCase withNumberOfAttempts(int numberOfAttempts) {
+    public final TestCase setNumberOfAttempts(int numberOfAttempts) {
         this.attempts = numberOfAttempts;
         return this;
     }
 
-    public TestCase withLogger(Logger logger) {
+    public final TestCase setLogger(Logger logger) {
         this.logger = logger;
         return this;
     }
 
     // factory
-    public Fluent createFluentApi(String type)
-            throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
+    public final Fluent newFluentApi(String type) throws
+            ClassNotFoundException,
+            NoSuchMethodException,
+            IllegalAccessException,
+            InvocationTargetException,
+            InstantiationException {
         // extracting class
-        Class t = Class.forName(type);
+        Class<?> t = Class.forName(type);
 
         // extract constructors
         Constructor<?>[] ctr = t.getConstructors();
@@ -118,6 +127,10 @@ public abstract class TestCase {
     }
 
     // setup
+    protected void onSetup() {
+
+    }
+
     private void setup() throws MalformedURLException {
         // constants
         final String DRIVER = "driver";
@@ -131,13 +144,13 @@ public abstract class TestCase {
         boolean isBinaries = isDriver && testParams.containsKey(BINARIES);
 
         // factoring
-        if(!isDriver) {
+        if (!isDriver) {
             throw new NotFoundException("you must provide a valid 'driver'");
         }
-        if(!isBinaries) {
+        if (!isBinaries) {
             driverParams.setDriver(testParams.get(DRIVER).toString());
         }
-        if(isBinaries){
+        if (isBinaries) {
             driverParams.setDriver(testParams.get(DRIVER).toString()).setBinaries(testParams.get(BINARIES).toString());
         }
 
@@ -152,7 +165,11 @@ public abstract class TestCase {
     }
 
     // cleanup
-    private void dispose() {
+    protected void onCleanup() {
+
+    }
+
+    private void cleanup() {
         if (driver != null) {
             driver.quit();
         }

@@ -18,7 +18,7 @@ public class SearchStudents extends TestCase {
         String fluent = testParams.get("fluent").toString();
         String students = testParams.get("students").toString();
 
-        return createFluentApi(fluent)
+        return newFluentApi(fluent)
                 .<Students>changeContext(students, application)
                 .findByName(keyword)
                 .students()
