@@ -21,6 +21,10 @@ public class WebDriverExtensions {
         actions = new Actions(driver);
     }
 
+    public WebDriver getDriver() {
+        return this.driver;
+    }
+
     public WebDriver goToUrl(String url) {
         driver.navigate().to(url);
         driver.manage().window().maximize();
@@ -120,15 +124,15 @@ public class WebDriverExtensions {
         return element;
     }
 
-    public WebDriver submitForm(int index){
+    public WebDriver submitForm(int index) {
         String script = String.format("document.forms[%d].submit();", index);
-        ((JavascriptExecutor)driver).executeScript(script);
+        ((JavascriptExecutor) driver).executeScript(script);
         return driver;
     }
 
-    public WebDriver submitForm(String id){
+    public WebDriver submitForm(String id) {
         String script = String.format("document.forms[%s].submit();", id);
-        ((JavascriptExecutor)driver).executeScript(script);
+        ((JavascriptExecutor) driver).executeScript(script);
         return driver;
     }
 }

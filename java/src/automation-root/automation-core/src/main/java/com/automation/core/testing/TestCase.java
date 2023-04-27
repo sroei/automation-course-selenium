@@ -9,7 +9,6 @@ import com.automation.extensions.contracts.DriverParams;
 import okhttp3.OkHttpClient;
 import org.openqa.selenium.NotFoundException;
 import org.openqa.selenium.WebDriver;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
@@ -55,9 +54,6 @@ public abstract class TestCase {
                     return this;
                 }
                 logger.debug(String.format("[%s] failed on attempt [%d]", getClass().getName(), i));
-            } catch (NotImplementedException e) {
-                logger.debug(e, e.getMessage());
-                return this;
             } catch (NullPointerException e) {
                 logger.debug(e, e.toString());
                 return this;

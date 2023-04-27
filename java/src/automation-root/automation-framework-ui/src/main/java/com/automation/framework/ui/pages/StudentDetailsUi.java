@@ -26,7 +26,7 @@ public class StudentDetailsUi extends FluentUi implements StudentDetails {
 
     @Override
     public String firstName() {
-        return getDriverExtensions().getElement(By.xpath("//dd[2]")).getText().trim();
+        return getExtendedDriver().getElement(By.xpath("//dd[2]")).getText().trim();
     }
 
     @Override

@@ -4,22 +4,10 @@ import com.google.gson.annotations.Expose;
 
 public class DriverParams {
     @Expose
-    private String source;
-
-    @Expose
     private String driver;
 
     @Expose
     private String binaries;
-
-    public String getSource() {
-        return source;
-    }
-
-    public DriverParams setSource(String source) {
-        this.source = source;
-        return this;
-    }
 
     public String getDriver() {
         return driver;

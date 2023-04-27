@@ -15,7 +15,7 @@ import java.net.MalformedURLException;
 public class FluentUi extends FluentBase {
 
     private final WebDriver driver;
-    private WebDriverExtensions driverExtensions;
+    private final WebDriverExtensions extendedDriver;
 
     public FluentUi(String driverParams) throws MalformedURLException {
         this(new WebDriverFactory(driverParams).get());
@@ -36,15 +36,15 @@ public class FluentUi extends FluentBase {
     public FluentUi(WebDriver driver, Logger logger) {
         super(logger);
         this.driver = driver;
-        driverExtensions = new WebDriverExtensions(driver);
+        extendedDriver = new WebDriverExtensions(driver);
     }
 
     public WebDriver getDriver() {
         return driver;
     }
 
-    public WebDriverExtensions getDriverExtensions() {
-        return driverExtensions;
+    public WebDriverExtensions getExtendedDriver() {
+        return extendedDriver;
     }
 
     @Override

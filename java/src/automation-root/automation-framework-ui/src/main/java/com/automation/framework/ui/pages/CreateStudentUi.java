@@ -28,13 +28,13 @@ public class CreateStudentUi extends FluentUi implements CreateStudent {
 
     @Override
     public Students create() {
-        getDriverExtensions().getEnabledElement(By.xpath("//input[@type='submit']")).click();
+        getExtendedDriver().getEnabledElement(By.xpath("//input[@type='submit']")).click();
         return new StudentsUi(getDriver());
     }
 
     @Override
     public String firstName() {
-        return getDriverExtensions().getEnabledElement(By.xpath("//input[@id='FirstMidName']")).getAttribute("value");
+        return getExtendedDriver().getEnabledElement(By.xpath("//input[@id='FirstMidName']")).getAttribute("value");
     }
 
     @Override
@@ -49,13 +49,13 @@ public class CreateStudentUi extends FluentUi implements CreateStudent {
 
     @Override
     public CreateStudent firstName(String fName) {
-        getDriverExtensions().getEnabledElement(By.xpath("//input[@id='FirstMidName']")).sendKeys(fName);
+        getExtendedDriver().getEnabledElement(By.xpath("//input[@id='FirstMidName']")).sendKeys(fName);
         return this;
     }
 
     @Override
     public CreateStudent lastName(String lName) {
-        getDriverExtensions().getEnabledElement(By.xpath("//input[@id='LastName']")).sendKeys(lName);
+        getExtendedDriver().getEnabledElement(By.xpath("//input[@id='LastName']")).sendKeys(lName);
         return this;
     }
 

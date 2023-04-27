@@ -20,6 +20,8 @@ import org.openqa.selenium.remote.RemoteWebDriver;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class WebDriverFactory {
     private final DriverParams driverParams;
@@ -38,7 +40,12 @@ public class WebDriverFactory {
      * @throws MalformedURLException from inner factory
      */
     public WebDriver get() throws MalformedURLException {
-        if(driverParams.getSource()==null || !driverParams.getSource().equalsIgnoreCase("REMOTE")) {
+        // setup
+        boolean isBinaries = driverParams.getBinaries() != null && driverParams.getBinaries().length() > 0;
+        boolean isRemote = isBinaries && driverParams.getBinaries().toUpperCase().startsWith("HTTP");
+
+        // get
+        if (!isRemote) {
             return getDriver();
         }
         return getRemoteDriver();
@@ -46,21 +53,31 @@ public class WebDriverFactory {
 
     // local web-drivers
     private WebDriver getChrome() {
+        Path base = Paths.get(driverParams.getBinaries());
+        Path path = base.resolve("chromedriver.exe");
+
+        // setup options
+        ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--remote-allow-origins=*");
+
         // CHROME
         ChromeDriverService chromeDriverService = new ChromeDriverService
                 .Builder()
-                .usingDriverExecutable(new File(driverParams.getBinaries() + "\\chromedriver.exe"))
+                .usingDriverExecutable(new File(path.toString()))
                 .usingAnyFreePort()
                 .build();
 
-        return new ChromeDriver(chromeDriverService);
+        return new ChromeDriver(chromeDriverService, chromeOptions);
     }
 
     private WebDriver getFirefox() {
+        Path base = Paths.get(driverParams.getBinaries());
+        Path path = base.resolve("geckodriver.exe");
+
         // FIREFOX
         GeckoDriverService geckoDriverService = new GeckoDriverService
                 .Builder()
-                .usingDriverExecutable(new File(driverParams.getBinaries() + "\\geckodriver.exe"))
+                .usingDriverExecutable(new File(path.toString()))
                 .usingAnyFreePort()
                 .build();
 
@@ -68,10 +85,13 @@ public class WebDriverFactory {
     }
 
     private WebDriver getInternetExplorer() {
+        Path base = Paths.get(driverParams.getBinaries());
+        Path path = base.resolve("IEDriverServer.exe");
+
         // INTERNET EXPLORER
         InternetExplorerDriverService ieDriverService = new InternetExplorerDriverService
                 .Builder()
-                .usingDriverExecutable(new File(driverParams.getBinaries() + "\\IEDriverServer.exe"))
+                .usingDriverExecutable(new File(path.toString()))
                 .usingAnyFreePort()
                 .build();
 
@@ -79,14 +99,23 @@ public class WebDriverFactory {
     }
 
     private WebDriver getEdge() {
+        // setup
+        Path base = Paths.get(driverParams.getBinaries());
+        Path path = base.resolve("msedgedriver.exe");
+
+        // setup options
+        EdgeOptions edgeOptions = new EdgeOptions();
+        edgeOptions.addArguments("--remote-allow-origins=*");
+
         // EDGE
         EdgeDriverService edgeDriverService = new EdgeDriverService
                 .Builder()
-                .usingDriverExecutable(new File(driverParams.getBinaries() + "\\MicrosoftWebDriver.exe"))
+                .usingDriverExecutable(new File(path.toString()))
                 .usingAnyFreePort()
                 .build();
 
-        return new EdgeDriver(edgeDriverService);
+        // get
+        return new EdgeDriver(edgeDriverService, edgeOptions);
     }
 
     private WebDriver getDriver(){
@@ -129,7 +158,7 @@ public class WebDriverFactory {
     // load json into driver-params object
     private static DriverParams loadParams(String driverParamsJson){
         if(driverParamsJson == null || driverParamsJson.isEmpty()){
-            return new DriverParams().setDriver("Chrome").setSource("Local").setBinaries(".");
+            return new DriverParams().setDriver("Chrome").setBinaries(".");
         }
         return new Gson().fromJson(driverParamsJson, DriverParams.class);
     }

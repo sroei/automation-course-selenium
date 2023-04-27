@@ -25,9 +25,9 @@ public class StudentsUi extends FluentUi implements Students {
 
     @Override
     public Students findByName(String name) {
-        WebElement element = getDriverExtensions().getEnabledElement(By.xpath("//input[@id='SearchString']"));
+        WebElement element = getExtendedDriver().getEnabledElement(By.xpath("//input[@id='SearchString']"));
         element.sendKeys(name);
-        getDriverExtensions().submitForm(0);
+        getExtendedDriver().submitForm(0);
 
         return this;
     }
@@ -38,7 +38,7 @@ public class StudentsUi extends FluentUi implements Students {
         ArrayList<Student> students = new ArrayList<>();
 
         // get all data-rows
-        List<WebElement> dataRows = getDriverExtensions().getElements(By.xpath("//tbody/tr"));
+        List<WebElement> dataRows = getExtendedDriver().getElements(By.xpath("//tbody/tr"));
 
         // iterate & build students
         for (WebElement dataRow : dataRows) {
@@ -50,7 +50,7 @@ public class StudentsUi extends FluentUi implements Students {
 
     @Override
     public CreateStudent create() {
-        getDriverExtensions().getEnabledElement(By.xpath("//a[contains(@href,'/Student/Create')]")).click();
+        getExtendedDriver().getEnabledElement(By.xpath("//a[contains(@href,'/Student/Create')]")).click();
         return new CreateStudentUi(getDriver());
     }
 

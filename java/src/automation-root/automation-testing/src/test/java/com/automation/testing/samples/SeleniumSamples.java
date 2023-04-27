@@ -310,7 +310,8 @@ public class SeleniumSamples {
 
     @Test
     public void goToUrlRemoteSample() throws InterruptedException, MalformedURLException {
-        WebDriver driver = new WebDriverFactory(new DriverParams().setDriver("chrome").setSource("remote").setBinaries("http://localhost:4444/wd/hub")).get();
+        DriverParams driverParams = new DriverParams().setDriver("chrome").setBinaries("http://localhost:4444/wd/hub");
+        WebDriver driver = new WebDriverFactory(driverParams).get();
 
         // extension object
         WebDriverExtensions driverExtensions = new WebDriverExtensions(driver);
