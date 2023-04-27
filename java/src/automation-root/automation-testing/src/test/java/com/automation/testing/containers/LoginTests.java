@@ -30,9 +30,9 @@ public class LoginTests {
                 "   'application':'https://start.telebank.co.il/login/#/LOGIN_PAGE'," +
                 "   'fluent':'com.automation.core.components.FluentUi'," +
                 "   'login':'com.automation.framework.ui.pages.LoginUi'," +
-                "   'id':'65921355'," +
-                "   'password':'Dora4646'," +
-                "   'code':'9g9dn8'," +
+                "   'id':''," +
+                "   'password':''," +
+                "   'code':''," +
                 "   'expectedMessage':'Foo Bar'" +
                 "}]";
 
